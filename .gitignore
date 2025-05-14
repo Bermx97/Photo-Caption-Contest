@@ -1,0 +1,13 @@
+
+/db/
+/data/
+/tmp/
+
+
+*.sqlite
+*.db
+
+
+.env
+
+node_modules/
