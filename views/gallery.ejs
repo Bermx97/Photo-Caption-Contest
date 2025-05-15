@@ -9,10 +9,21 @@
   <div class="gallery">
     <% images.forEach(img => { %>
       <div class="gallery-item">
-        <img src="/images<%= img.filename %>" alt="<%= img.id %>" id="img.filename" width="500" height="1100"/>
+        <img src="/images<%= img.filename %>" alt="<%= img.id%>" id="<%= img.id%>" width="500" height="1100" data-api-url="/image/<%= img.id %>"/>
         <p></p>
       </div>
     <% }) %>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = document.querySelectorAll('.gallery-item img');
+      images.forEach(img => {
+        img.addEventListener('click', () => {
+          const apiUrl = img.getAttribute('data-api-url');
+          window.location.href = apiUrl;
+        });
+      });
+    });
+    </script>
 </body>
 </html>

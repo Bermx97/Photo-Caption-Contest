@@ -37,7 +37,9 @@ app.get('/gallery', async (req, res) => {
   }
 });
 
-
+app.get('/image/:id', (req, res) => {
+  res.json(`I love: ${req.params.id}`)
+});
     
 
 
