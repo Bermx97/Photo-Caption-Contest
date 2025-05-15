@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/styles/gallery.css">
+</head>
+<body>
+  <h1></h1>
+  <div class="gallery">
+    <% images.forEach(img => { %>
+      <div class="gallery-item">
+        <img src="/images/<%= img.filename %>" alt="<%= img.id %>" id="img.filename" width="500" height="1100"/>
+        <p></p>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>
