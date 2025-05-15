@@ -23,9 +23,9 @@ body {
   width: 100%;
   height: auto;          
   max-height: 1100px; 
-  border-radius: 8px;
+  border-radius: 22px;
   object-fit: cover;
-  transition: transform 0.2s;
+  transition: transform 0.8s;
 }
 
 .gallery-item img:hover {
