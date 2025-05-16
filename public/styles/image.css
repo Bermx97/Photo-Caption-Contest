@@ -49,12 +49,13 @@ body {
 #captions {
   color: #999ab3a8;
   font-size: 80px;
-  
+  font-family: sans-serif;
 }
 
 #caption {
-    color: rgb(55, 41, 119);
+    color: rgb(76, 68, 114);
     font-size: 30px;
+    font-family: Georgia, serif;
 }
 
 

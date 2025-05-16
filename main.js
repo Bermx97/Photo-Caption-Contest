@@ -45,13 +45,12 @@ app.get('/image/:id', async (req, res) => {
     const wanted = req.params.id;
     const data = await pool.query('SELECT username, filename, image_id, caption FROM users INNER JOIN captions ON users.id = captions.user_id INNER JOIN images ON images.id = captions.image_id WHERE image_id = $1', [wanted]);
     const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
-    //const captionsResult = await pool.query('SELECT * FROM users INNER JOIN captions ON users.id = captions.user_id INNER JOIN images ON images.id = captions.image_id WHERE image_id = $1', [wanted]);
-
+    
     if (result.rows.length === 0) {
       return res.status(404).send('image not found :c');
     }
     const captions = data.rows;
-    res.render('image', {captions, image: result.rows[0], data: data.rows[1] });
+    res.render('image', {captions, image: result.rows[0] });
   } catch (err) {
     console.error(err);
     res.status(500).send('server error');
