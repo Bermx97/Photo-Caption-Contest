@@ -43,9 +43,8 @@ app.get('/gallery', async (req, res) => {
 app.get('/image/:id', async (req, res) => {
   try {
     const wanted = req.params.id;
-    const data = await pool.query('SELECT username, filename, image_id, caption FROM users INNER JOIN captions ON users.id = captions.user_id INNER JOIN images ON images.id = captions.image_id WHERE image_id = $1', [wanted]);
+    const data = await pool.query('SELECT username, image_id, caption FROM users INNER JOIN captions ON users.id = captions.user_id WHERE image_id = $1', [wanted]); //INNER JOIN images ON images.id = captions.image_id
     const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
-    
     if (result.rows.length === 0) {
       return res.status(404).send('image not found :c');
     }
@@ -59,4 +58,4 @@ app.get('/image/:id', async (req, res) => {
     
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
-})
+});
