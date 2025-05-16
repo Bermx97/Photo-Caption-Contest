@@ -5,7 +5,6 @@ require('dotenv').config();
 const { Pool } = require('pg');
 const path = require('path');
 
-
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -18,31 +17,40 @@ app.use(express.static(__dirname + "/public"));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
 app.use('/styles', express.static(path.join(__dirname, '/styles')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 
-app.get('/', (req, res) => {
-  res.json('hi');
+/*
+app.get('/test/:id', async (req, res) => {
+  const result = req.params.id
+  res.send({ images: result })
 });
+
+*/
+
 
 app.get('/gallery', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM images');
-    res.render('gallery', { images: result.rows})
+    res.render('gallery', { images: result.rows })
   } catch (err) {
     console.error(err);
-    res.status(500).send("server error");
+    res.status(500).send('server error');
   }
 });
 
-app.get('/image/:id', (req, res) => {
-  res.json(`I love: ${req.params.id}`)
+app.get('/image/:id', async (req, res) => {
+  try {
+    const wanted = req.params.id;
+    const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
+    res.render('image', { image: result.rows[0] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('server error');
+  }
 });
     
-
-
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 })

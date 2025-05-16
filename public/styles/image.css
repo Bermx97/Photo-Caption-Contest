@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  padding: 5px;
+  background-color: rgb(23, 21, 36);
+}
+
+.gallery-item img {
+  width: 40%;
+  max-height: 1200px;         
+  border-radius: 22px;
+  object-position: center;
+  object-fit: cover;
+  transition: transform 0.8s;
+}
