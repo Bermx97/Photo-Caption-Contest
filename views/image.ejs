@@ -5,10 +5,14 @@
   <link rel="stylesheet" href="/styles/image.css">
 </head>
 <body>
-  <h1></h1>
-  <div class="image">
-    <div class="gallery-item">
-    <img src="/images<%= image.filename %>" alt="<%= image.id%>" id="<%= image.id%>" data-api-url="/image/<%= image.id %>"/>
+  <div class="container">
+    <img src="/images<%= image.filename %>" alt="<%= image.id%>" id="<%= image.id%>" class="gallery-item"/>
+    <div class="text-container">
+        <h1 id="captions">Captions:</h1>
+        <p><% captions.forEach(caption => { %>
+        <p id="caption"><%= caption.username %>: <%= caption.caption %></p>
+    <% }) %></p>
+    </div>
   </div>
 </body>
 </html>
