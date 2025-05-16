@@ -13,3 +13,10 @@ body {
   object-fit: cover;
   transition: transform 0.8s;
 }
+
+@media (max-width: 800px) {
+  .gallery-item img {
+    width: 100%;
+  }
+}
+

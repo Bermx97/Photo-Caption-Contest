@@ -44,6 +44,11 @@ app.get('/image/:id', async (req, res) => {
   try {
     const wanted = req.params.id;
     const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send('image not found');
+    }
+    
     res.render('image', { image: result.rows[0] });
   } catch (err) {
     console.error(err);
