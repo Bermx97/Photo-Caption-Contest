@@ -21,14 +21,6 @@ app.use('/styles', express.static(path.join(__dirname, '/styles')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 
-/*
-app.get('/test/:id', async (req, res) => {
-  const result = req.params.id
-  res.send({ images: result })
-});
-
-*/
-
 
 app.get('/gallery', async (req, res) => {
   try {
@@ -49,13 +41,19 @@ app.get('/image/:id', async (req, res) => {
       return res.status(404).send('image not found :c');
     }
     const captions = data.rows;
-    res.render('image', {captions, image: result.rows[0] });
+    res.render('image', { captions, image: result.rows[0] });
   } catch (err) {
     console.error(err);
     res.status(500).send('server error');
   }
 });
-    
+
+app.post('/caption', (req, res) => {
+  const { caption } = req.body;
+  res.json({hmm: caption});
+});
+
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
