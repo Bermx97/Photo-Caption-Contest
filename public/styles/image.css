@@ -37,8 +37,8 @@ body {
   width: 800px;
   margin: 0;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .text-container::-webkit-scrollbar {

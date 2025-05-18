@@ -48,9 +48,20 @@ app.get('/image/:id', async (req, res) => {
   }
 });
 
-app.post('/caption', (req, res) => {
-  const { caption } = req.body;
-  res.json({hmm: caption});
+app.post('/caption/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const caption = Object.values(req.body)[0];
+    const result = await pool.query('INSERT INTO captions (caption, user_id, image_id) VALUES ($1, $2, $3)', [caption, 1, id]);
+    if (result.rowCount === 0) {
+      return res.status(500).send('server error');
+    } 
+      res.status(200).json({ message: 'caption added', data: result.rows[0] });
+    
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('server error');
+    }
 });
 
 

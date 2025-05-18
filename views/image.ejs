@@ -18,34 +18,12 @@
       </div>
       <div class="form">
         <form id="form">
-          <textarea id="textarea" name="newcaption" maxlength="150" placeholder="Add your caption..."></textarea>
+          <textarea id="textarea" name=<%= image.id %> maxlength="150" placeholder="Add your caption..."></textarea>
           <button id="button" type="submit">add</button>
         </form>
       </div>
     </div>
   </div>
   <script src="DOM.js"></script>
-</body>
-</html>
-
-
-
-<!--
-<body>
-  <div class="container">
-      <img src="/images<%= image.filename %>" alt="<%= image.id%>" id="<%= image.id%>" class="gallery-item"/>
-      <div class="text-container">
-        <h1 id="captions">Captions:</h1>
-        <p><% captions.forEach(caption => { %>
-        <p id="caption"><%= caption.username %>: <%= caption.caption %></p>
-    <% }) %></p>
-    </div>
-  <div class="form">
-    <form id="form">
-      <textarea id="textarea" name="newcaption" maxlength="90">test</textarea>
-      <button type="submit">wyślij</button>
-    </form>
-  </div>
-<script src="DOM.js"></script>
 </body>
 </html>
