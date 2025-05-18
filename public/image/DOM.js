@@ -2,8 +2,8 @@ document.getElementById('form').addEventListener('submit', async function(event)
   event.preventDefault();
   const formData = new FormData(this);
   const data = Object.fromEntries(formData.entries());
-  const id = Object.keys(data);
-  const response = await fetch(`/caption/${id}`, {
+
+  const response = await fetch(`/caption/${data.image_id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

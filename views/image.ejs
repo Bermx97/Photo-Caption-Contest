@@ -18,7 +18,8 @@
       </div>
       <div class="form">
         <form id="form">
-          <textarea id="textarea" name=<%= image.id %> maxlength="150" placeholder="Add your caption..."></textarea>
+          <textarea id="textarea" name="newcaption" maxlength="130" placeholder="Add your caption..." required></textarea>
+          <input type="hidden" name="image_id" value="<%= image.id %>">
           <button id="button" type="submit">add</button>
         </form>
       </div>
