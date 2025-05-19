@@ -7,7 +7,8 @@ const path = require('path');
 const { body, validationResult } = require('express-validator');
 const helmet = require('helmet');
 const bcrypt = require('bcrypt');
-
+const session = require('express-session')
+const pgSession = require('connect-pg-simple')(session);
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -15,6 +16,23 @@ const pool = new Pool({
     rejectUnauthorized: false,
   }
 });
+
+app.use(session({
+  store: new pgSession({
+    pool: pool,
+    createTableIfMissing: true
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false, // true (require HTTPS)
+    maxAge: 1000 * 60 * 60 * 24 
+  }
+}));
+
+
 
 app.use(helmet());
 app.use(express.json());
@@ -56,6 +74,7 @@ app.get('/gallery', async (req, res) => {
 
 app.get('/image/:id', async (req, res) => {
   try {
+    req.session.userId = 6; //remove after login page is complete
     const wanted = req.params.id;
     const data = await pool.query('SELECT username, image_id, caption FROM users INNER JOIN captions ON users.id = captions.user_id WHERE image_id = $1', [wanted]);
     const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
@@ -82,7 +101,7 @@ app.post('/caption/:id',
   try {
     const id = req.params.id;
     const newcaption = req.body.newcaption;
-    const result = await pool.query('INSERT INTO captions (caption, user_id, image_id) VALUES ($1, $2, $3) RETURNING *', [newcaption, 1, id]);
+    const result = await pool.query('INSERT INTO captions (caption, user_id, image_id) VALUES ($1, $2, $3) RETURNING *', [newcaption, req.session.userId, id]); //use session details
     if (result.rowCount === 0) {
       return res.status(500).send('server error');
     } 
@@ -142,7 +161,8 @@ app.post('/login',
       if (!isMatch) {
         return res.status(401).json({ error: 'Invalid login credentials' });
       }
-      res.json('youditit');
+      req.session.userId = foundUser.id; //create session
+      res.status(200).send('logged')
     } catch (err) {
       console.error(err);
       res.status(500).send('server error');
