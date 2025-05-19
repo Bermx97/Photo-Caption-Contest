@@ -120,6 +120,34 @@ app.post('/register',
     }
 });
 
+app.post('/login', 
+  body('username')
+  .notEmpty()
+  .withMessage('Username is required')
+  .isLength({ min: 3, max: 20 })
+  .withMessage('username must be 3-20 characters long'),
+  body('password')
+  .notEmpty()
+  .withMessage('password is required')
+  .isLength({ min: 6 })
+  .withMessage('Password must be at least 6 characters long'),
+  validateRequest, async (req, res) => {
+    try {
+      const user = await pool.query('SELECT * FROM users WHERE username = $1', [req.body.username]);
+      if (user.rows.length === 0) {
+        return res.status(401).json({ error: 'Invalid login credentials' });
+      }
+      const foundUser = user.rows[0];
+      const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
+      if (!isMatch) {
+        return res.status(401).json({ error: 'Invalid login credentials' });
+      }
+      res.json('youditit');
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('server error');
+    }
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
