@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 const path = require('path');
 const { body, validationResult } = require('express-validator');
 const helmet = require('helmet');
-
+const bcrypt = require('bcrypt');
 
 
 const pool = new Pool({
@@ -73,20 +73,47 @@ app.get('/image/:id', async (req, res) => {
 app.post('/caption/:id',
   body('newcaption')
   .trim()
-  .isLength({ min: 1, max: 130 } )
+  .isLength({ min: 1, max: 130 })
   .withMessage('Caption must be between 1 and 130 characters long')
-  .matches(/^[\w\s.,!?()\-]+$/)
+  .matches(/^[\p{L}\p{N}\p{P}\p{S}\p{Zs}]+$/u)
   .withMessage('Caption contains prohibited characters'),
   validateRequest,
   async (req, res) => {
   try {
     const id = req.params.id;
     const newcaption = req.body.newcaption;
-    const result = await pool.query('INSERT INTO captions (caption, user_id, image_id) VALUES ($1, $2, $3) RETURNING *', [newcaption, 3, id]);
+    const result = await pool.query('INSERT INTO captions (caption, user_id, image_id) VALUES ($1, $2, $3) RETURNING *', [newcaption, 1, id]);
     if (result.rowCount === 0) {
       return res.status(500).send('server error');
     } 
       res.status(200).json({ message: 'caption added', data: result.rows[0] });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('server error');
+    }
+});
+
+app.post('/register',
+  body('username')
+  .isLength({ min: 3, max: 20 })
+  .withMessage('username must be 3-20 characters long')
+  .isAlphanumeric()
+  .withMessage('Username must contain only letters and numbers'),
+  body('password')
+  .isLength({ min: 6 })
+  .withMessage('Password must be at least 6 characters long')
+  .matches(/[A-Z]/)
+  .withMessage('Password must contain at least one uppercase letter'),
+  validateRequest, async (req, res) => {
+    try {
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+      const user = await pool.query('SELECT * FROM users WHERE username = $1', [req.body.username]);
+      if (user.rows.length > 0) {
+        return res.status(409).json({ error: 'Username already taken' });
+      }
+      const result = await pool.query('INSERT INTO users (username, password) VALUES ($1, $2)', [req.body.username, hashedPassword]);
+      res.status(200).json({ message: 'user added' });
     } catch (err) {
       console.error(err);
       res.status(500).send('server error');
