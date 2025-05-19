@@ -5,6 +5,9 @@ require('dotenv').config();
 const { Pool } = require('pg');
 const path = require('path');
 const { body, validationResult } = require('express-validator');
+const helmet = require('helmet');
+
+
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -13,6 +16,7 @@ const pool = new Pool({
   }
 });
 
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
@@ -21,6 +25,15 @@ app.set('view engine', 'ejs');
 
 app.use('/styles', express.static(path.join(__dirname, '/styles')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "'unsafe-inline'"],
+    styleSrc: ["'self'", "'unsafe-inline'"],
+    imgSrc: ["'self'", "data:"],
+  },
+}));
 
 const validateRequest = (req, res, next) => {
   const errors = validationResult(req);
@@ -74,7 +87,6 @@ app.post('/caption/:id',
       return res.status(500).send('server error');
     } 
       res.status(200).json({ message: 'caption added', data: result.rows[0] });
-    
     } catch (err) {
       console.error(err);
       res.status(500).send('server error');
