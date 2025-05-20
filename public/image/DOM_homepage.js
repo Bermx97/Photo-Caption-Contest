@@ -20,7 +20,7 @@ document.getElementById('loginform').addEventListener('submit', async function(e
   } else {
     const errorData = await response.json();
     console.error('error', response.status, response.statusText);
-    errorMessageElement.textContent = errorData.message || 'Incorrect loginInvalid login credentials';
+    errorMessageElement.textContent = errorData.message || 'Use username: Admin  password: Adminn';
     errorMessageElement.style.display = 'block';
   }
 });
