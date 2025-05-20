@@ -58,3 +58,9 @@ body {
     color: #ffffff;
     opacity: 0.3; 
 }
+
+@media (max-width: 600px) {
+    body {
+        background-color: rgb(30, 27, 46);
+    }
+}
