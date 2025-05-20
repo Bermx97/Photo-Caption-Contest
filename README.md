@@ -6,7 +6,7 @@ use:
 
 username: Admin
 
-pawword: Adminn
+password: Adminn
 
 
 if you want login
