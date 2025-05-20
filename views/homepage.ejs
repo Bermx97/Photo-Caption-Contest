@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in</title>
   <link rel="stylesheet" href="/styles/homepage.css">
 </head>
 <body>
@@ -10,9 +11,9 @@
       <form id="loginform" method="POST">
         <h2 id="login"> Log in to your account </h2>
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" maxlength="20"><br>
+        <input type="text" id="username" name="username" maxlength="20" required><br>
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" minlength="6">
+        <input type="password" id="password" name="password" minlength="6" required>
         <button id="button" type="submit">Sign In</button>
         <div id="error-message" style="color: red; display: none;"></div>
       </form>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration</title>
+  <link rel="stylesheet" href="/styles/register.css">
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <form id="registerform" method="POST">
+        <h2 id="register">Create Account</h2>
+        <label for="username">Username:</label><br>
+        
+        <input type="text" id="username" name="username" maxlength="20" required>
+        <div id="username-error" class="error-message"></div>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" minlength="6" required>
+        <div id="password-error" class="error-message"></div>
+        <button id="button" type="submit">Register</button>
+        <div id="general-error" class="error-message"></div>
+      </form>
+      <p id="login">Do you have an account?  <a href="/"> Sign in</a></p>
+    </div>
+  </div>
+  <script src="/image/DOM_register.js"></script>
+</body>
+</html>
