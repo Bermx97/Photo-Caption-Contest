@@ -3,7 +3,10 @@
 https://photo-caption-contest-gviy.onrender.com/gallery
 
 use: 
+
 username: Admin
+
 pawword: Adminn
+
 
 if you want login
