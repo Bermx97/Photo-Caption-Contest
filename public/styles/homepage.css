@@ -8,24 +8,23 @@ body {
 .container {
     display: flex;
     justify-content: center; 
-    align-items: center;     
-    height: 100vh;
+    align-items: center;   
+    height: 70vh;
     width: 100%;
   
 }
 
 .box {
     display: flex;
-    justify-content: center; 
-    align-items: center;     
+    justify-content: center;     
     height: 100vh;   
     gap: 20px;
     max-width: 100%;
     border-radius: 25px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
     padding: 20px;
-    height: 300px;
-    width: 800px;
+    height: 400px;
+    width: 820px;
     color: #999ab3a8;
     font-size: 30px;
     font-family: sans-serif;
@@ -59,13 +58,36 @@ body {
     opacity: 0.3; 
 }
 
+#register {
+    font-size: 17px;
+    margin-top: auto;
+    text-align: center;
+}
+
 @media (max-width: 600px) {
     body {
         background-color: rgb(30, 27, 46);
     }
     .box {
-
-        height: 250px;
-        width: 70%
+        height: 210px;
+        width: 70%;
+        font-size: 18px;
+    }
+    #username, #password {
+        height: 40px;
+        font-size: 14px;
+    }
+    #login {
+        font-size: 16px;
+    }
+    #error-message {
+        font-size: 7px;
+    }
+    #register {
+        font-size: 4px;
+    }
+    #button {
+    height: 30px;
+    width: 80px;
     }
 }

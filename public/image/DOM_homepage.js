@@ -20,7 +20,7 @@ document.getElementById('loginform').addEventListener('submit', async function(e
   } else {
     const errorData = await response.json();
     console.error('error', response.status, response.statusText);
-    errorMessageElement.textContent = errorData.message || 'Use username: Admin  password: Adminn';
+    errorMessageElement.textContent = errorData.message || 'Invalid username or password. Please try again.';
     errorMessageElement.style.display = 'block';
   }
 });
