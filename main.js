@@ -112,9 +112,13 @@ app.post('/caption/:id',
     }
 });
 
+
+
 app.get('/register', (req, res) => {
   res.send('hi')
 })
+
+
 
 app.post('/register',
   body('username')

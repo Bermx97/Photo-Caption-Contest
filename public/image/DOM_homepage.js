@@ -5,7 +5,7 @@ document.getElementById('loginform').addEventListener('submit', async function(e
   const errorMessageElement = document.getElementById('error-message');
   errorMessageElement.textContent = '';
   errorMessageElement.style.display = 'none';
-
+  console.log('łapie')
   const response = await fetch('/login', {
     method: 'POST',
     headers: {

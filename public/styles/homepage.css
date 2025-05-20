@@ -61,7 +61,12 @@ body {
 #register {
     font-size: 17px;
     margin-top: auto;
+    justify-content: space-between;
     text-align: center;
+}
+
+#error-message{
+    font-size: 20px;
 }
 
 @media (max-width: 600px) {
@@ -81,10 +86,10 @@ body {
         font-size: 16px;
     }
     #error-message {
-        font-size: 7px;
+        font-size: 10px;
     }
     #register {
-        font-size: 4px;
+        font-size: 6px;
     }
     #button {
     height: 30px;
