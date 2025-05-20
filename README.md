@@ -9,4 +9,4 @@ username: Admin
 password: Adminn
 
 
-if you want login
+if you want to log in
