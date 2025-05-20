@@ -74,7 +74,7 @@ app.get('/gallery', async (req, res) => {
 
 app.get('/image/:id', async (req, res) => {
   try {
-    req.session.userId = 6; //remove after login page is complete
+    //req.session.userId = 6; //remove after login page is complete
     const wanted = req.params.id;
     const data = await pool.query('SELECT username, image_id, caption FROM users INNER JOIN captions ON users.id = captions.user_id WHERE image_id = $1', [wanted]);
     const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
@@ -168,6 +168,10 @@ app.post('/login',
       res.status(500).send('server error');
     }
 });
+
+app.get('/', (req, res) => {
+  res.render('homepage')
+})
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
