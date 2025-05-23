@@ -74,7 +74,6 @@ app.get('/gallery', async (req, res) => {
 
 app.get('/image/:id', async (req, res) => {
   try {
-    //req.session.userId = 6; //remove after login page is complete
     const wanted = req.params.id;
     const data = await pool.query('SELECT username, image_id, caption FROM users INNER JOIN captions ON users.id = captions.user_id WHERE image_id = $1', [wanted]);
     const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
@@ -93,7 +92,7 @@ app.post('/caption/:id',
   body('newcaption')
   .trim()
   .isLength({ min: 1, max: 130 })
-  .withMessage('Caption must be between 1 and 130 characters long')
+  .withMessage('Caption must be between 1 and 130 characters long')  // <=== remember to add it to the client response
   .matches(/^[\p{L}\p{N}\p{P}\p{S}\p{Zs}]+$/u)
   .withMessage('Caption contains prohibited characters'),
   validateRequest,
@@ -170,7 +169,7 @@ app.post('/login',
         return res.status(401).json({ error: 'Invalid login credentials' });
       }
       req.session.userId = foundUser.id; //create session
-      res.status(200).send('logged')
+      res.status(200).send('logged');
     } catch (err) {
       console.error(err);
       res.status(500).send('server error');

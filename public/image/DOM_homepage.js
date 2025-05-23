@@ -23,3 +23,7 @@ document.getElementById('loginform').addEventListener('submit', async function(e
     errorMessageElement.style.display = 'block';
   }
 });
+
+document.getElementById('buttongallery').addEventListener('click', async function(event) {
+  window.location.href = '/gallery'
+})

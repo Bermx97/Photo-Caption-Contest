@@ -15,15 +15,15 @@ body {
 }
 
 .box {
-    display: flex;
+    display: grid;
     justify-content: center;     
     height: 100vh;   
     gap: 20px;
     max-width: 100%;
     border-radius: 25px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    height: 400px;
+    padding: 60px;
+    height: 420px;
     width: 820px;
     color: #999ab3a8;
     font-size: 30px;
@@ -45,12 +45,27 @@ body {
     font-size: 30px;
 }
 
+
+
+#buttongallery {
+  margin-top: 4px;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 60px;
+  width: 200px;
+  background-color: black;
+  color: #ffffff;
+  opacity: 0.3;
+  font-size: 17px;
+}
+
+
 #button {
+    margin-top: 4px;
     pointer-events: auto;
     float: right;
     border-radius: 20px;
     cursor: pointer;
-    border: 'none';
     height: 45px;
     width: 110px;
     background-color: black;
@@ -59,10 +74,10 @@ body {
 }
 
 #register {
-    font-size: 17px;
-    margin-top: auto;
+    font-size: 19px;
+    margin-top: 0px;
     justify-content: space-between;
-    text-align: center;
+    text-align: right;
 }
 
 #error-message{
@@ -94,5 +109,10 @@ body {
     #button {
     height: 30px;
     width: 80px;
+    }
+    #buttongallery {
+    height: 50px;
+    width: 100px;
+    font-size: 14px;
     }
 }
