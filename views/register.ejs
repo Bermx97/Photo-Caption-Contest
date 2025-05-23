@@ -9,17 +9,16 @@
   <div class="container">
     <div class="box">
       <form id="registerform" method="POST">
-        <h2 id="register">Create Account</h2>
-        <label for="username">Username:</label><br>
-        
+        <h2 id="register">Create new account</h2>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" maxlength="20" required>
         <div id="username-error" class="error-message"></div>
-
-        <label for="password">Password:</label><br>
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password" minlength="6" required>
         <div id="password-error" class="error-message"></div>
         <button id="button" type="submit">Register</button>
         <div id="general-error" class="error-message"></div>
+        <button id="buttongallery" type="button" >Continue as guest </button>
       </form>
       <p id="login">Do you have an account?  <a href="/"> Sign in</a></p>
     </div>

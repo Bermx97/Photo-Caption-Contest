@@ -92,7 +92,15 @@ body {
     font-family: Georgia, serif;
 }
 
+#error {
+  color: red;
+  font-size: 19px;
+}
+
 @media (max-width: 600px) {
+  #error {
+    font-size: 14px;
+  }
   #caption {
     font-size: 100%;
   }

@@ -11,7 +11,11 @@ body {
     align-items: center;   
     height: 70vh;
     width: 100%;
-  
+}
+
+#loginform{
+    margin-left: 12%;
+    margin-right: 12%;
 }
 
 .box {
@@ -45,18 +49,16 @@ body {
     font-size: 30px;
 }
 
-
-
 #buttongallery {
-  margin-top: 4px;
-  border-radius: 20px;
-  cursor: pointer;
-  height: 60px;
-  width: 200px;
-  background-color: black;
-  color: #ffffff;
-  opacity: 0.3;
-  font-size: 17px;
+    margin-top: 4px;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 60px;
+    width: 200px;
+    background-color: black;
+    color: #ffffff;
+    opacity: 0.3;
+    font-size: 17px;
 }
 
 
@@ -74,6 +76,7 @@ body {
 }
 
 #register {
+    margin-right: 12%;
     font-size: 19px;
     margin-top: 0px;
     justify-content: space-between;
@@ -89,11 +92,12 @@ body {
         background-color: rgb(30, 27, 46);
     }
     .box {
-        height: 210px;
-        width: 70%;
+        height: 220px;
+        width: 68%;
         font-size: 18px;
     }
     #username, #password {
+        
         height: 40px;
         font-size: 14px;
     }
@@ -104,7 +108,8 @@ body {
         font-size: 10px;
     }
     #register {
-        font-size: 8px;
+        font-size: 10px;
+        margin-right: 8%;
     }
     #button {
     height: 30px;
@@ -114,5 +119,9 @@ body {
     height: 50px;
     width: 100px;
     font-size: 14px;
+    }
+    #loginform {
+        margin-left: 8%;
+        margin-right: 8%;
     }
 }

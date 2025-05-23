@@ -36,3 +36,6 @@ document.getElementById('registerform').addEventListener('submit', async functio
     }
 });
 
+document.getElementById('buttongallery').addEventListener('click', async function(event) {
+    window.location.href = '/gallery';
+})

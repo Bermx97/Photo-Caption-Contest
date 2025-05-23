@@ -33,7 +33,6 @@ app.use(session({
 }));
 
 
-
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -62,6 +61,14 @@ const validateRequest = (req, res, next) => {
   next();
 };
 
+const isAuthenticated = (req, res, next) => {
+  if (req.session.isAuthenticated) {
+    return next();
+  } else {
+    res.status(401).json({ message: "Please log in to post a comment." });
+  }
+};
+
 app.get('/gallery', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM images');
@@ -88,13 +95,19 @@ app.get('/image/:id', async (req, res) => {
   }
 });
 
-app.post('/caption/:id',
+app.post('/caption/:id', isAuthenticated,
   body('newcaption')
   .trim()
-  .isLength({ min: 1, max: 130 })
-  .withMessage('Caption must be between 1 and 130 characters long')  // <=== remember to add it to the client response
+  .isLength({ min: 3, max: 130 })
+  .withMessage('Caption must be between 1 and 130 characters long')
   .matches(/^[\p{L}\p{N}\p{P}\p{S}\p{Zs}]+$/u)
-  .withMessage('Caption contains prohibited characters'),
+  .withMessage('Comment contains invalid characters')
+  .custom((value) => {
+    if (/[\n\r\t]/.test(value)) {
+      throw new Error('Caption cannot contain line breaks or tabs');
+    }
+      return true;
+  }),
   validateRequest,
   async (req, res) => {
   try {
@@ -111,13 +124,9 @@ app.post('/caption/:id',
     }
 });
 
-
-
 app.get('/register', (req, res) => {
-  res.render('register')
+  res.render('register');
 })
-
-
 
 app.post('/register',
   body('username')
@@ -150,7 +159,7 @@ app.post('/login',
   body('username')
   .notEmpty()
   .withMessage('Username is required')
-  .isLength({ min: 3, max: 20 })
+  .isLength({ min: 1, max: 20 })
   .withMessage('username must be 3-20 characters long'),
   body('password')
   .notEmpty()
@@ -168,6 +177,7 @@ app.post('/login',
       if (!isMatch) {
         return res.status(401).json({ error: 'Invalid login credentials' });
       }
+      req.session.isAuthenticated = true;
       req.session.userId = foundUser.id; //create session
       res.status(200).send('logged');
     } catch (err) {
@@ -177,7 +187,7 @@ app.post('/login',
 });
 
 app.get('/', (req, res) => {
-  res.render('homepage')
+  res.render('homepage');
 })
 
 app.listen(PORT, () => {
