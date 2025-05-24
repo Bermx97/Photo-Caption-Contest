@@ -98,6 +98,9 @@ body {
 }
 
 @media (max-width: 600px) {
+  body {
+    background-color: rgb(40, 36, 56);
+  }
   #error {
     font-size: 14px;
   }
