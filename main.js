@@ -133,7 +133,7 @@ app.get('/image/:id', async (req, res) => {
 app.post('/caption/:id', isAuthenticated,
   body('newcaption')
   .trim()
-  .isLength({ min: 3, max: 130 })
+  .isLength({ min: 1, max: 130 })
   .withMessage('Caption must be between 1 and 130 characters long')
   .matches(/^[\p{L}\p{N}\p{P}\p{S}\p{Zs}]+$/u)
   .withMessage('Comment contains invalid characters')
