@@ -24,7 +24,6 @@ document.getElementById('form').addEventListener('submit', async function(event)
       error.textContent = err.msg
     });
   }
-
     else {
     console.error('error:', response.status, response.statusText);
   }
@@ -40,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function likeComment(captionId) {
+  const btn = document.querySelector(`.like-button[data-id="${captionId}"]`);
   const countSpan = document.getElementById(`like-count-${captionId}`);
   try {
     const response = await fetch(`/like/${captionId}`, { method: 'POST' });
@@ -56,10 +56,13 @@ async function likeComment(captionId) {
       alert("something went wrong");
       return;
     }
+    if (btn) {
+      btn.classList.add('liked');
+      setTimeout(() => btn.classList.remove('liked'), 500);
+    }
     countSpan.textContent = parseInt(countSpan.textContent) + 1;
     localStorage.setItem(`liked-${captionId}`, "true");
-    window.location.reload();
   } catch (error) {
     console.error(error);
   }
-}
+};

@@ -161,7 +161,7 @@ app.post('/caption/:id', isAuthenticated,
 
 app.get('/register', (req, res) => {
   res.render('register');
-})
+});
 
 app.post('/register',
   body('username')
@@ -194,7 +194,7 @@ app.post('/login',
   body('username')
   .notEmpty()
   .withMessage('Username is required')
-  .isLength({ min: 1, max: 20 })
+  .isLength({ min: 3, max: 20 })
   .withMessage('username must be 3-20 characters long'),
   body('password')
   .notEmpty()
