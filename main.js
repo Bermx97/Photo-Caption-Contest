@@ -65,7 +65,7 @@ const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
     return next();
   } else {
-    res.status(401).json({ message: "Please log in to post a comment." });
+    res.status(401).json({ message: "Please log do it." });
   }
 };
 
@@ -79,10 +79,45 @@ app.get('/gallery', async (req, res) => {
   }
 });
 
+app.post('/like/:captionId', isAuthenticated, async (req, res) => {
+  const captionId = req.params.captionId;
+  try {
+    const alreadyLiked = await pool.query(
+      'SELECT 1 FROM likes WHERE captions_id = $1 AND user_id = $2',
+      [captionId, req.session.userId]
+    );
+    if (alreadyLiked.rows.length > 0) {
+      return res.status(400).json({ error: 'You already liked this coment' });
+    }
+    await pool.query(
+      'INSERT INTO likes (captions_id, user_id) VALUES ($1, $2)',
+      [captionId, req.session.userId]
+    );
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'server error' });
+  }
+});
+
+
 app.get('/image/:id', async (req, res) => {
   try {
     const wanted = req.params.id;
-    const data = await pool.query('SELECT username, image_id, caption FROM users INNER JOIN captions ON users.id = captions.user_id WHERE image_id = $1', [wanted]);
+    const data = await pool.query(`
+    SELECT 
+      captions.id, 
+      captions.caption, 
+      captions.image_id, 
+      users.username,
+      COUNT(likes.id) AS like_count
+    FROM captions
+    INNER JOIN users ON users.id = captions.user_id
+    LEFT JOIN likes ON likes.captions_id = captions.id
+    WHERE captions.image_id = $1
+    GROUP BY captions.id, users.username
+    ORDER BY COUNT(likes.id) DESC
+  `, [wanted]);
     const result = await pool.query('SELECT * FROM images WHERE id = $1', [wanted]);
     if (result.rows.length === 0) {
       return res.status(404).send('image not found :c');

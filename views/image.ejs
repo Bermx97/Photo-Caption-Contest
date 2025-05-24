@@ -14,7 +14,9 @@
       <div class="text-container">
         <h1 id="captions">Captions:</h1>
         <% captions.forEach(caption => { %>
-          <p id="caption"><%= caption.username %>: <%= caption.caption %></p>
+          <p id="caption"><%= caption.username %>: <%= caption.caption %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="like-button" data-id="<%= caption.id %>">&#128061;</button>
+            (<span id="like-count-<%= caption.id %>"><%= caption.like_count %></span>)
+          </p>
         <% }) %>
       </div>
       <div class="form">

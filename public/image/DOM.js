@@ -30,4 +30,36 @@ document.getElementById('form').addEventListener('submit', async function(event)
   }
 });
 
-document.getElementById('error')
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.like-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      likeComment(id);
+    });
+  });
+});
+
+async function likeComment(captionId) {
+  const countSpan = document.getElementById(`like-count-${captionId}`);
+  try {
+    const response = await fetch(`/like/${captionId}`, { method: 'POST' });
+    if (response.status === 401) {
+      alert("You must be logged in to like this comment");
+      return;
+    }
+    if (response.status === 400) {
+      const data = await response.json();
+      alert(data.error || "You already liked this caption");
+      return;
+    }
+    if (!response.ok) {
+      alert("something went wrong");
+      return;
+    }
+    countSpan.textContent = parseInt(countSpan.textContent) + 1;
+    localStorage.setItem(`liked-${captionId}`, "true");
+    window.location.reload();
+  } catch (error) {
+    console.error(error);
+  }
+}
