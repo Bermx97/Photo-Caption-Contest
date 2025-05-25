@@ -7,7 +7,7 @@ body {
 
 .logout-button {
     pointer-events: auto;
-    float: right;
+    float: inline-start;
     border-radius: 20px;
     cursor: pointer;
     height: 55px;
@@ -16,6 +16,7 @@ body {
     color: #ffffff;
     opacity: 0.3;
     font-size: 20px;
+    margin-bottom: 30px;
 }
 
 .like-button {
@@ -50,6 +51,7 @@ body {
   display: flex;
   gap: 20px;
   max-width: 100%;
+  margin-bottom: 20px;
 }
 
 .left-column {
@@ -127,6 +129,9 @@ body {
     height: 400px;
     width: 90%;
   }
+  #captions {
+    font-size: 20px;
+  }
 }
 
 #captions {
@@ -160,7 +165,7 @@ body {
     font-size: 100%;
   }
   #captions {
-    font-size: 350%;
+    font-size: 250%;
   }
   .left-column {
     flex-direction: column;

@@ -23,13 +23,13 @@
         <form id="form">
           <textarea id="textarea" name="newcaption" maxlength="130" placeholder="Add your caption..." required></textarea>
           <input type="hidden" name="image_id" value="<%= image.id %>">
-          <button id="button" type="submit">add</button>
+          <button id="button" type="submit">Add</button>
           <div id="error" class="error-message"></div>
         </form>
       </div>
     </div>
   </div>
-      <form action="/logout" method="POST">
+    <form action="/logout" method="POST">
       <button type="submit" class="logout-button">Logout</button>
     </form>
   <script src="DOM.js"></script>
