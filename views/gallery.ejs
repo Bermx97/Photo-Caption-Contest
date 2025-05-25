@@ -15,6 +15,9 @@
       </div>
     <% }) %>
   </div>
+    <form action="/logout" method="POST">
+      <button type="submit" class="logout-button">Logout</button>
+    </form>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const images = document.querySelectorAll('.gallery-item img');

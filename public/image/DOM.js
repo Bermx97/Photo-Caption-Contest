@@ -20,8 +20,8 @@ document.getElementById('form').addEventListener('submit', async function(event)
   } else if (response.status === 400) {
     const result = await response.json();
     result.errors.forEach(err => {
-      const error = document.getElementById('error')
-      error.textContent = err.msg
+      const error = document.getElementById('error');
+      error.textContent = err.msg;
     });
   }
     else {

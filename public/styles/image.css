@@ -5,6 +5,19 @@ body {
   background-color: rgb(23, 21, 36);
 }
 
+.logout-button {
+    pointer-events: auto;
+    float: right;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 55px;
+    width: 140px;
+    background-color: black;
+    color: #ffffff;
+    opacity: 0.3;
+    font-size: 20px;
+}
+
 .like-button {
     background: none;
     border: none;
@@ -86,6 +99,11 @@ body {
 }
 
 @media (max-width: 1000px) {
+  .logout-button {
+    height: 40px;
+    width: 100px;
+    font-size: 18px;
+  }
   body {
     background-color: rgb(30, 27, 46);
   }
@@ -172,7 +190,6 @@ body {
   float: right;
   border-radius: 20px;
   cursor: pointer;
-  border: 'none';
   height: 40px;
   width: 100px;
   background-color: black;

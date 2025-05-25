@@ -10,12 +10,16 @@ const bcrypt = require('bcrypt');
 const session = require('express-session')
 const pgSession = require('connect-pg-simple')(session);
 
+
+
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   }
 });
+
 
 app.use(session({
   store: new pgSession({
@@ -65,7 +69,7 @@ const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
     return next();
   } else {
-    res.status(401).json({ message: "Please log do it." });
+    res.status(401).json({ message: "Please log in to do this." });
   }
 };
 
@@ -219,6 +223,17 @@ app.post('/login',
       console.error(err);
       res.status(500).send('server error');
     }
+});
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Logout failed');
+    }
+    res.clearCookie('connect.sid');
+    res.redirect('/');
+  });
 });
 
 app.get('/', (req, res) => {
