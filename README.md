@@ -56,7 +56,7 @@ This application is fully hosted on Render. It includes:
 
 There is no need to clone or install the project to use it.
 
-## Local Development (optional)
+## Local Development
 
 To run the project locally:
 
