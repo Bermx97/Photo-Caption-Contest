@@ -9,8 +9,10 @@ const helmet = require('helmet');
 const bcrypt = require('bcrypt');
 const session = require('express-session')
 const pgSession = require('connect-pg-simple')(session);
-
-
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 const pool = new Pool({

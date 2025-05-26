@@ -1,0 +1,351 @@
+openapi: 3.0.0
+info:
+  title: Photo Caption Contest API
+  version: 1.0.0
+  description: API for adding captions, liking captions, and managing users.
+
+servers:
+  - url: https://photo-caption-contest-gviy.onrender.com/
+    description: Production server
+paths:
+  /gallery:
+    get:
+      summary: Get image gallery
+      description: Returns a list of all images stored in the database and renders the gallery view.
+      responses:
+        '200':
+          description: A successful response with the gallery view
+          content:
+            text/html:
+              schema:
+                type: string
+                example: "<!DOCTYPE html>..."
+        '500':
+          description: Server error
+
+  /like/{captionId}:
+    post:
+      summary: Like a caption
+      description: Adds a like to the caption by the logged-in user. Only authenticated users can like captions. A user can like a caption only once.
+      tags:
+        - Likes
+      parameters:
+        - in: path
+          name: captionId
+          required: true
+          schema:
+            type: integer
+          description: ID of the caption to like
+      responses:
+        '200':
+          description: Like was successfully added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        '400':
+          description: User has already liked this caption
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: You already liked this coment
+        '401':
+          description: Unauthorized – user is not logged in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Please log do it.
+        '500':
+          description: Internal server error
+  
+  /image/{id}:
+    get:
+      summary: Get image with captions
+      description: Returns image data and all related captions with user names and like counts, ordered by number of likes (descending).
+      tags:
+        - Images
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the image to fetch
+      responses:
+        '200':
+          description: Successfully retrieved image and its captions
+          content:
+            text/html:
+              schema:
+                type: string
+                example: "<!DOCTYPE html>..." 
+        '404':
+          description: Image not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: image not found :c
+        '500':
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: server error
+
+  /caption/{id}:
+    post:
+      summary: Add a caption to an image
+      description: Adds a new caption to the specified image. Only authenticated users can add captions.
+      tags:
+        - Captions
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the image to which the caption is added
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                newcaption:
+                  type: string
+                  description: The caption text
+                  maxLength: 130
+                  example: "This is a funny pig 🐽"
+      responses:
+        '200':
+          description: Caption added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: caption added
+                  data:
+                    type: object
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+        '401':
+          description: Unauthorized – user not authenticated
+        '500':
+          description: Internal server error
+
+  /register:
+    get:
+      summary: Render the registration page
+      description: Returns the HTML page for user registration.
+      responses:
+        '200':
+          description: Registration page rendered successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                example: "<html>...</html>"
+
+    post:
+      summary: Register a new user
+      description: Create a new user with a unique username and hashed password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  description: "User's desired username (3-20 alphanumeric chars)"
+                  example: "user123"
+                password:
+                  type: string
+                  description: "User's password (min 6 chars, at least one uppercase)"
+                  example: "StrongPass1"
+      responses:
+        '200':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "user added"
+        '409':
+          description: Username already taken
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Username already taken"
+        '400':
+          description: Validation error (invalid username or password)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          example: "Username must be 3-20 characters long"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "server error"
+  
+  /login:
+    post:
+      summary: User login
+      description: Authenticate user and create a session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  description: User's username (3-20 characters)
+                  example: user123
+                password:
+                  type: string
+                  description: User's password (min 6 characters)
+                  example: StrongPass1
+      responses:
+        '200':
+          description: User logged in successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: logged
+        '401':
+          description: Invalid login credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid login credentials
+        '400':
+          description: Validation error (missing or invalid username/password)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          example: Username is required
+        '500':
+          description: Server error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: server error
+
+  /logout:
+    post:
+      summary: Logout user
+      description: Destroy user session and clear session cookie.
+      responses:
+        '302':
+          description: Redirect to homepage after logout
+          headers:
+            Location:
+              description: URL to redirect after logout
+              schema:
+                type: string
+                example: /
+        '500':
+          description: Logout failed due to server error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Logout failed
+
+  /:
+    get:
+      summary: Render homepage
+      description: Returns the homepage view to the client.
+      responses:
+        '200':
+          description: Homepage rendered successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                example: "<html>...homepage content...</html>"
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: connect.sid
