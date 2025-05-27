@@ -66,6 +66,14 @@ To run the project locally:
 3. Create a `.env` file and add your database and session configuration
 4. Run the application:
    - npm run dev
+  
+## Database Schema:
+
+
+ 
+![Database Schema](https://github.com/user-attachments/assets/c6416d4d-069d-4497-9017-0440ba4f35d9)
+
+
 
 
 ## Contact
