@@ -26,6 +26,7 @@ const pool = new Pool({
   }
 });
 
+app.set('trust proxy', 1);
 
 app.use(session({
   store: new pgSession({
