@@ -7,6 +7,7 @@ document.getElementById('form').addEventListener('submit', async function(event)
     headers: {
       'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify(data)
   });
   if (response.ok) {
