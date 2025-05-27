@@ -12,6 +12,10 @@ const pgSession = require('connect-pg-simple')(session);
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
+const NodeCache = require("node-cache");
+const galleryCache = new NodeCache({ stdTTL: 600 });
+
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
@@ -33,7 +37,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: false, // true (require HTTPS)
+    secure: true, // true (require HTTPS)
     maxAge: 1000 * 60 * 60 * 24 
   }
 }));
@@ -76,8 +80,13 @@ const isAuthenticated = (req, res, next) => {
 };
 
 app.get('/gallery', async (req, res) => {
+  const cachedGallery = galleryCache.get('gallery');
+  if (cachedGallery) {
+    return res.render('gallery', { images: cachedGallery });
+  }
   try {
     const result = await pool.query('SELECT * FROM images');
+    galleryCache.set('gallery', result.rows);
     res.render('gallery', { images: result.rows });
   } catch (err) {
     console.error(err);
