@@ -2,7 +2,9 @@
 
 This is a web application deployed on Render.com. It allows users to register, log in, add humorous captions to images loaded from a database, and like captions added by other users.
 
-https://github.com/user-attachments/assets/39ba9a98-8f2e-4211-a3ca-cf8e596aac09
+
+https://github.com/user-attachments/assets/cc1e6698-8204-4af3-819f-c2afb04273b9
+
 
 ## Live Application
 
