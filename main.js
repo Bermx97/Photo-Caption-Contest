@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3002;
 require('dotenv').config();
 const { Pool } = require('pg');
 const path = require('path');
-const { body, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');  //do wywwalenia
 const helmet = require('helmet');
 const bcrypt = require('bcrypt');
 const session = require('express-session')
@@ -19,7 +19,7 @@ const galleryCache = new NodeCache({ stdTTL: 600 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-const pool = new Pool({
+const pool = new Pool({                 //do usunięcia
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
@@ -38,10 +38,11 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: true, // true (require HTTPS)
+    secure: false, // true (require HTTPS) zmień to po localchoście
     maxAge: 1000 * 60 * 60 * 24 
   }
 }));
+
 
 
 app.use(helmet());
@@ -54,6 +55,9 @@ app.set('view engine', 'ejs');
 app.use('/styles', express.static(path.join(__dirname, '/styles')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
+const captionsRoutes = require('./routes/captions.routes');
+app.use('/caption', captionsRoutes);
+
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
@@ -63,7 +67,8 @@ app.use(helmet.contentSecurityPolicy({
   },
 }));
 
-const validateRequest = (req, res, next) => {
+
+const validateRequest = (req, res, next) => {  //do wywalenia
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log("validation errors", errors.array());  
@@ -72,13 +77,13 @@ const validateRequest = (req, res, next) => {
   next();
 };
 
-const isAuthenticated = (req, res, next) => {
+/*const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
     return next();
   } else {
     res.status(401).json({ message: "Please log in to do this." });
   }
-};
+}; */
 
 app.get('/gallery', async (req, res) => {
   const cachedGallery = galleryCache.get('gallery');
@@ -95,7 +100,7 @@ app.get('/gallery', async (req, res) => {
   }
 });
 
-app.post('/like/:captionId', isAuthenticated, async (req, res) => {
+/*app.post('/like/:captionId', isAuthenticated, async (req, res) => {             wyłączone na potrzeby testu NIE WYWALAĆ
   const captionId = req.params.captionId;
   try {
     const alreadyLiked = await pool.query(
@@ -114,7 +119,7 @@ app.post('/like/:captionId', isAuthenticated, async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'server error' });
   }
-});
+}); */
 
 
 app.get('/image/:id', async (req, res) => {
@@ -146,7 +151,7 @@ app.get('/image/:id', async (req, res) => {
   }
 });
 
-app.post('/caption/:id', isAuthenticated,
+/*app.post('/caption/:id', isAuthenticated,
   body('newcaption')
   .trim()
   .isLength({ min: 1, max: 130 })
@@ -173,7 +178,7 @@ app.post('/caption/:id', isAuthenticated,
       console.error(err);
       res.status(500).send('server error');
     }
-});
+});*/
 
 app.get('/register', (req, res) => {
   res.render('register');
