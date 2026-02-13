@@ -43,7 +43,7 @@ async function likeComment(captionId) {
   const btn = document.querySelector(`.like-button[data-id="${captionId}"]`);
   const countSpan = document.getElementById(`like-count-${captionId}`);
   try {
-    const response = await fetch(`/like/${captionId}`, { method: 'POST' });
+    const response = await fetch(`/likes/${captionId}`, { method: 'POST', credentials: 'include'});
     if (response.status === 401) {
       alert("You must be logged in to like this comment");
       return;

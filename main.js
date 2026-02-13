@@ -55,9 +55,12 @@ app.use('/images', express.static(path.join(__dirname, 'public/images')));
 const captionsRoutes = require('./src/routes/captions.routes');
 const imagesRoutes = require('./src/routes/images.routes');
 const galleryRoutes = require('./src/routes/gallery.routes');
+const likesRoutes = require('./src/routes/likes.routes');
 app.use('/caption', captionsRoutes);
-app.use('/image', imagesRoutes);
+//app.use('/image', imagesRoutes);
 app.use('/gallery', galleryRoutes);
+app.use('/likes', likesRoutes);
+
 
 app.use(helmet.contentSecurityPolicy({
   directives: {
@@ -78,16 +81,16 @@ const validateRequest = (req, res, next) => {  //do wywalenia
   next();
 };
 
-/*const isAuthenticated = (req, res, next) => {
+const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
     return next();
   } else {
     res.status(401).json({ message: "Please log in to do this." });
   }
-}; */
+}; 
 
 
-/*app.post('/like/:captionId', isAuthenticated, async (req, res) => {             wyłączone na potrzeby testu NIE WYWALAĆ
+/*app.post('/like/:captionId', isAuthenticated, async (req, res) => {             //wyłączone na potrzeby testu NIE WYWALAĆ
   const captionId = req.params.captionId;
   try {
     const alreadyLiked = await pool.query(
