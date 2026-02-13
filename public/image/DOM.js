@@ -59,6 +59,7 @@ async function likeComment(captionId) {
     }
     if (btn) {
       btn.classList.add('liked');
+      window.location.reload();
       setTimeout(() => btn.classList.remove('liked'), 500);
     }
     countSpan.textContent = parseInt(countSpan.textContent) + 1;
