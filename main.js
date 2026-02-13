@@ -52,9 +52,9 @@ app.set('view engine', 'ejs');
 app.use('/styles', express.static(path.join(__dirname, '/styles')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-const captionsRoutes = require('./routes/captions.routes');
-const imagesRoutes = require('./routes/images.routes');
-const galleryRoutes = require('./routes/gallery.routes');
+const captionsRoutes = require('./src/routes/captions.routes');
+const imagesRoutes = require('./src/routes/images.routes');
+const galleryRoutes = require('./src/routes/gallery.routes');
 app.use('/caption', captionsRoutes);
 app.use('/image', imagesRoutes);
 app.use('/gallery', galleryRoutes);
