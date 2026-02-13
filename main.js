@@ -90,26 +90,6 @@ const isAuthenticated = (req, res, next) => {
 }; 
 
 
-/*app.post('/like/:captionId', isAuthenticated, async (req, res) => {             //wyłączone na potrzeby testu NIE WYWALAĆ
-  const captionId = req.params.captionId;
-  try {
-    const alreadyLiked = await pool.query(
-      'SELECT 1 FROM likes WHERE captions_id = $1 AND user_id = $2',
-      [captionId, req.session.userId]
-    );
-    if (alreadyLiked.rows.length > 0) {
-      return res.status(400).json({ error: 'You already liked this coment' });
-    }
-    await pool.query(
-      'INSERT INTO likes (captions_id, user_id) VALUES ($1, $2)',
-      [captionId, req.session.userId]
-    );
-    res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'server error' });
-  }
-}); */
 
 
 app.get('/register', (req, res) => {
