@@ -9,23 +9,15 @@
   <div class="gallery">
     <% images.forEach(img => { %>
       <div class="gallery-item">
-        <img src="/images<%= img.filename %>" alt="<%= img.id%>" id="<%= img.id%>" width="500" height="1100" data-api-url="/image/<%= img.id %>"/>
+        <a href="/gallery/<%= img.id %>">
+          <img src="/images/<%= img.filename %>" alt="Image <%= img.id %>" width="500" height="1100">
+        </a>
       </div>
     <% }) %>
   </div>
-    <form action="/logout" method="POST">
-      <button type="submit" class="logout-button">Logout</button>
-    </form>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const images = document.querySelectorAll('.gallery-item img');
-      images.forEach(img => {
-        img.addEventListener('click', () => {
-          const apiUrl = img.getAttribute('data-api-url');
-          window.location.href = apiUrl;
-        });
-      });
-    });
-    </script>
+
+  <form action="/logout" method="POST" style="text-align:center; margin-top:20px;">
+    <button type="submit" class="logout-button">Logout</button>
+  </form>
 </body>
 </html>
