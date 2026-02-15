@@ -2,16 +2,18 @@ const likeService = require('../services/like.service');
 
 exports.like = async (req, res) => {
   const captionId = req.params.captionId;
-  const userId = req.session.userId
-  try {
-    const alreadyLiked = await likeService.isAlreadyLiked(captionId, userId);
+  const userId = req.session.userId;
+  const alreadyLiked = await likeService.isAlreadyLiked(captionId, userId);
     if (alreadyLiked.rows.length > 0) {
-      return res.status(400).json({ error: 'You already liked this comment' });
+      const error = new Error ('You already liked this comment');
+      error.status = 400;
+      throw error;
     }
-    await likeService.addLike(captionId, userId);
+    const addLike = await likeService.addLike(captionId, userId);
+    if (!addLike) {
+      const error = new Error('server error');
+      error.status = 500;
+      throw error;
+    }
     res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'server error' });
-  }
 }; 

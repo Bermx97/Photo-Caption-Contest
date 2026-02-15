@@ -34,7 +34,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: true, // true (require HTTPS)
+    secure: false, // true (require HTTPS)
     maxAge: 1000 * 60 * 60 * 24 
   }
 }));
@@ -52,6 +52,8 @@ const loginRoutes = require('./src/routes/login.routes');
 const registerRoutes = require('./src/routes/register.routes');
 const homeRoutes = require('./src/routes/home.routes');
 const logoutRoutes = require('./src/routes/logout.routes');
+const errorHandler = require('./src/middlewares/errorHandler');
+
 app.use('/', homeRoutes);
 app.use('/caption', captionsRoutes);
 app.use('/gallery', galleryRoutes);
@@ -59,6 +61,8 @@ app.use('/likes', likesRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
+app.use(errorHandler);
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

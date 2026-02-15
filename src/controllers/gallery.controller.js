@@ -1,42 +1,21 @@
 const galleryService = require('../services/gallery.service');
 
 exports.showGallery = async (req, res) => {
-  try {
     const images = await galleryService.getGallery();
+    if (!images) {
+      const error = new Error('server error');
+      error.status = 500;
+      throw error;
+    }
     res.render('gallery', { images });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('server error');
-  }
 };
 
 exports.showImage = async (req, res) => {
-  try {
-    const image = await galleryService.getImageById(req.params.id);
-
-    if (!image) {
-      return res.status(404).send('Image not found');
-    }
-
-    res.render('image', { image });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('server error');
-  }
-};
-
-exports.showImage = async (req, res) => {
-  try {
     const { image, captions } = await galleryService.getImageWithCaptions(req.params.id);
-
     if (!image) {
-      return res.status(404).send('Image not found');
+      const error = new Error('Image not found');
+      error.status = 404;
+      throw error;
     }
-
     res.render('image', { image, captions });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('server error');
-  }
 };
-

@@ -45,7 +45,7 @@ async function likeComment(captionId) {
   try {
     const response = await fetch(`/likes/${captionId}`, { method: 'POST', credentials: 'include'});
     if (response.status === 401) {
-      alert("You must be logged in to like this comment");
+      alert("You must be logged in to like this caption");
       return;
     }
     if (response.status === 400) {
