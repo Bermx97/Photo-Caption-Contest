@@ -10,7 +10,7 @@ exports.like = async (req, res) => {
       throw error;
     }
     const addLike = await likeService.addLike(captionId, userId);
-    if (!addLike) {
+    if (!addLike || addLike.rowCount === 0) {
       const error = new Error('server error');
       error.status = 500;
       throw error;

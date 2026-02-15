@@ -9,7 +9,8 @@ exports.isAlreadyLiked = async (captionId, userId) => {
 };
 
 exports.addLike = async (captionId, userId) => {
-    await pool.query(
+    return await pool.query(
       'INSERT INTO likes (captions_id, user_id) VALUES ($1, $2)',
-      [captionId, userId])
+      [captionId, userId]
+    );
 };
