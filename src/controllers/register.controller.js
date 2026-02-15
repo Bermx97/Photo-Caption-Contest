@@ -2,23 +2,30 @@ const registerService = require('../services/register.service');
 const bcrypt = require('bcrypt');
 
 exports.register = async (req, res) => {
-    try {
       const saltRounds = 10;
-      const password = req.body.password
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
-      const username = req.body.username
+      const password = req.body.password;
+      const username = req.body.username;
+      if (!username || !password) {
+        const error = new Error ('Username and password are required');
+        error.status = 400;
+        throw error;
+      }
       const user = await registerService.findUser(username);
       if (user.rows.length > 0) {
-        return res.status(409).json({ error: 'Username already taken' });
+        const error = new Error('Username already taken');
+        error.status = 409;
+        throw error;
       }
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
       const result = await registerService.createUser(username, hashedPassword);
-      res.status(200).json({ message: 'user added' });
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('server error');
-    }
+      if (!result || result.rowCount === 0) {
+        const error = new Error('server error');
+        error.status = 500;
+        throw error;
+      }
+      res.status(201).json({ message: 'user added' });
 };
 
-exports.showRegisterPage = async (req, res) => {
+exports.showRegisterPage = (req, res) => {
     res.render('register');
 };

@@ -2,8 +2,9 @@
 exports.logout = async (req, res) => {
      req.session.destroy(err => {
     if (err) {
-      console.error(err);
-      return res.status(500).send('Logout failed');
+      const error = new Error('Logout failed');
+      error.status = 500;
+      return next(error);
     }
     res.clearCookie('connect.sid');
     res.redirect('/');

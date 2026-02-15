@@ -2,25 +2,29 @@ const loginService = require('../services/login.service');
 const bcrypt = require('bcrypt');
 
 exports.login = async (req, res) => {
-    try {
-      const wanted = req.body.username
-      const user = await loginService.findUser(wanted) //await pool.query('SELECT * FROM users WHERE username = $1', [req.body.username]);
-      if (user.rows.length === 0) {
-        return res.status(401).json({ error: 'Invalid login credentials' });
+      const wanted = req.body.username;
+      const password = req.body.password;
+      if (!wanted || !password) {
+        const error = new Error('Username and password are required');
+        error.status = 400;
+        throw error;
+      }
+      const user = await loginService.findUser(wanted);
+      if (user.rows.length === 0 ) {
+        const error = new Error('Invalid login credentials');
+        error.status = 401;
+        throw error;
       }
       const foundUser = user.rows[0];
-      const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
+      const isMatch = await bcrypt.compare(password, foundUser.password);
       if (!isMatch) {
-        return res.status(401).json({ error: 'Invalid login credentials' });
+        const error = new Error('Invalid login credentials');
+        error.status = 401;
+        throw error;
       }
       req.session.isAuthenticated = true;
       req.session.userId = foundUser.id; //create session
       res.status(200).send('logged');
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('server error');
-    }
 };
-
 
 
