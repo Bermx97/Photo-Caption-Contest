@@ -22,6 +22,7 @@ The application is fully deployed on Render, including the database. Users can a
 - Input validation and error messages
 - Security headers via Helmet
 - Session-based authentication using express-session
+- The application is fully responsive and adapts to different screen sizes.
 
 ## Technology Stack
 
