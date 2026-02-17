@@ -1,7 +1,6 @@
 const express = require('express');
 require('dotenv').config();
 const app = express();
-const PORT = process.env.PORT || 3002;
 const path = require('path');
 const helmet = require('helmet');
 const session = require('express-session')
@@ -63,7 +62,4 @@ app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
 app.use(errorHandler);
 
-
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+module.exports = app;
