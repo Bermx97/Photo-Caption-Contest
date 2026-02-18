@@ -2,7 +2,7 @@ const galleryService = require('../services/gallery.service');
 
 exports.showGallery = async (req, res) => {
     const images = await galleryService.getGallery();
-    if (!images) {
+    if (!images || images.length === 0) {
       const error = new Error('server error');
       error.status = 500;
       throw error;
@@ -19,3 +19,4 @@ exports.showImage = async (req, res) => {
     }
     res.render('image', { image, captions });
 };
+
