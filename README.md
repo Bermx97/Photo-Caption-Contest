@@ -23,7 +23,8 @@ The application is fully deployed on Render, including the database. Users can a
 - Security headers via Helmet
 - Session-based authentication using express-session
 - The application is fully responsive and adapts to different screen sizes.
-
+- Automated tests for controllers and endpoints (run locally with `npm test`)
+  
 ## Technology Stack
 
 - Node.js
@@ -35,6 +36,7 @@ The application is fully deployed on Render, including the database. Users can a
 - express-validator
 - helmet
 - Swagger for API documentation
+- Jest and Supertest for automated testing
 
 ## API Overview
 
