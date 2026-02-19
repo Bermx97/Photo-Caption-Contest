@@ -6,11 +6,9 @@ const bcrypt = require('bcrypt');
 describe('POST /caption/:id', () => {
     let agent;
     let testUserId;
-
     const testPassword = '123456';
     const testUsername = 'testuser_' + Math.floor(Math.random() * 1000000);
     const testCaption = 'TEST_CAPTION_' + Date.now();
-
     beforeAll(async () => {
         agent = request.agent(app);
         const hashedPassword = await bcrypt.hash(testPassword, 10);
