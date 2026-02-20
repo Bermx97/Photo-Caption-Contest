@@ -8,8 +8,8 @@ describe('POST /login', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
-    
-    it('should return 400 if user is not found"', async () => {
+
+    it('should return 400 if the user is not specified', async () => {
         const response = await request(app)
         .post('/login')
         .send({ password: 'password' });
@@ -17,7 +17,7 @@ describe('POST /login', () => {
         expect(response.body.message).toBe('Username is required');
     });
 
-    it('should return 400 if !password', async () => {
+    it('should return 400 if the password is not specified', async () => {
         const response = await request(app)
         .post('/login')
         .send({ username: 'Test' });
