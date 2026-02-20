@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
 const loginService = require('../src/services/login.service');
-const registerService = require('../src/services/register.service')
+const registerService = require('../src/services/register.service');
 
 jest.mock('../src/services/login.service');
 jest.mock('../src/services/register.service');

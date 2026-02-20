@@ -1,5 +1,5 @@
 const registerService = require('../services/register.service');
-const loginService = require('../services/login.service')
+const loginService = require('../services/login.service');
 const bcrypt = require('bcrypt');
 
 exports.register = async (req, res) => {
