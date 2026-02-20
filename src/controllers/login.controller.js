@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
       }
       req.session.isAuthenticated = true;
       req.session.userId = foundUser.id; //create session
-      res.status(200).send('logged');
+      res.status(200).json({ message: 'logged' });
 };
 
 

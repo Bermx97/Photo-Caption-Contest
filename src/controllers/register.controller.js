@@ -1,4 +1,5 @@
 const registerService = require('../services/register.service');
+const loginService = require('../services/login.service')
 const bcrypt = require('bcrypt');
 
 exports.register = async (req, res) => {
@@ -10,7 +11,7 @@ exports.register = async (req, res) => {
         error.status = 400;
         throw error;
       }
-      const user = await registerService.findUser(username);
+      const user = await loginService.findUser(username);
       if (user.rows.length > 0) {
         const error = new Error('Username already taken');
         error.status = 409;

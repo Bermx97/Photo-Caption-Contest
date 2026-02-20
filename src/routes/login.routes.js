@@ -12,7 +12,7 @@ router.post('/',
     .withMessage('username must be 3-20 characters long'),
     body('password')
     .notEmpty()
-    .withMessage('password is required')
+    .withMessage('Password is required')
     .isLength({ min: 6 })
     .withMessage('Password must be at least 6 characters long'),
     validateRequest, loginController.login);

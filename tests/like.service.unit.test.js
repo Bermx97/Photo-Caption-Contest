@@ -15,7 +15,7 @@ describe('isAlreadyLiked', () => {
 });
 
 describe('addLike', () => {
-    it('should return return info about added row', async () => {
+    it('should return info about added row', async () => {
         pool.query.mockResolvedValue({
             command: 'INSERT', 
             rowCount: 1, 

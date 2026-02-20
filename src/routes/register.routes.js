@@ -16,8 +16,7 @@ router.post('/',
     .withMessage('Password must be at least 6 characters long')
     .matches(/[A-Z]/)
     .withMessage('Password must contain at least one uppercase letter'),
-    validateRequest, registerController.register
-);
+    validateRequest, registerController.register);
 
 router.get('/', registerController.showRegisterPage);
 
