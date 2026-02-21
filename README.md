@@ -23,24 +23,42 @@ The application is fully deployed on Render, including the database. Users can a
 - Security headers via Helmet
 - Session-based authentication using express-session
 - The application is fully responsive and adapts to different screen sizes.
-- Automated tests for controllers and endpoints (run locally with `npm test`)
+- Automated tests for controllers, service and endpoints (run locally with `npm test`)
   
 ## Technology Stack
 
-- Node.js
-- Express.js
-- PostgreSQL (hosted on Render)
-- EJS template engine
-- express-session
-- bcrypt
-- express-validator
-- helmet
-- Swagger for API documentation
-- Jest and Supertest for automated testing
+- ******Backend:****** Node.js, Express.js
+- ****Database:**** PostgreSQL (hosted on Render)
+- ****Templating Engine:**** EJS
+- ****Authentication:**** express-session, bcrypt
+- ****Validation & Security:**** express-validator, helmet
+- ****API Docs:**** Swagger
+- ****Testing:**** Jest, Supertest
 
 ## API Overview
 
 The API is documented with Swagger and can be explored at https://photo-caption-contest-gviy.onrender.com/api-docs/ .
+
+## Testing
+
+The project includes unit and integration tests covering all controllers, services, and endpoints.
+
+Run tests locally:
+- npm install
+- npm test
+
+What is tested:
+
+Controllers: login, register, captions, likes, gallery
+
+Services: database queries, validation logic, likes handling
+
+Endpoints: authentication, adding captions, liking captions, gallery display
+
+Test example:
+
+<img width="1053" height="564" alt="image" src="https://github.com/user-attachments/assets/56edff23-f0e8-4d59-bb85-9336cb33900c" />
+
 
 ## Security
 
