@@ -52,5 +52,30 @@ describe('GET /gallery/:id', () => {
         expect(response.body.message).toBe('Image not found');
     });
 
-    //it('should return 200 ')
+    it('should return 200 and render image with captions if image exist', async () => {
+        const req = { params: { id: 'lolek' } }
+        const res = { render: jest.fn() };
+
+        galleryService.getImageWithCaptions.mockResolvedValue({
+             image: { id: 'lolek', filename: 'lolek.jpg' },
+             captions: [
+                { id: 6, caption: 'testCaption', user_id: 4, image_id: 'lolek' },
+                { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' }
+             ]
+            });
+        
+        await galleryController.showImage(req, res);
+
+        const response = await request(app)
+        .get('/gallery/lolek')
+        expect(response.status).toBe(200);
+        expect(res.render).toHaveBeenCalledWith('image', {
+            image: { id: 'lolek', filename: 'lolek.jpg' },
+            captions: [
+                { id: 6, caption: 'testCaption', user_id: 4, image_id: 'lolek' },
+                { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' }
+             ]
+        });
+        expect(res.render).toHaveBeenCalledTimes(1);
+    });
 });

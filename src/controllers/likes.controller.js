@@ -15,5 +15,6 @@ exports.like = async (req, res) => {
       error.status = 500;
       throw error;
     }
+    res.status(201);
     res.json({ success: true });
 }; 
