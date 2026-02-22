@@ -440,3 +440,13 @@ input[type="hidden"] {
   display: block;
   opacity: 1;
 }
+
+
+.delete-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 25px;
+  vertical-align: 5px;
+}

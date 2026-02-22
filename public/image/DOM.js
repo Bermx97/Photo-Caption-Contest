@@ -115,5 +115,37 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error(err);
   }
 });
+
+const deleteModalTitle = document.getElementById('modalInput');
+const deleteConfirmBtn = document.querySelector('#modalForm button[type="submit"]');
+
+document.querySelectorAll('.delete-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const captionId = btn.dataset.id;
+    deleteModalTitle.value = 'Are you sure you want to delete this comment?';
+    deleteModalTitle.disabled = true;
+    deleteConfirmBtn.textContent = 'Delete';
+    deleteConfirmBtn.onclick = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await fetch(`/caption/${captionId}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+        if (response.ok) {
+          modal.classList.remove('show');
+          backdrop.classList.remove('show');
+          window.location.reload();
+        } else {
+          alert('Could not delete comment');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    modal.classList.add('show');
+    backdrop.classList.add('show');
+  });
+});
 });
 

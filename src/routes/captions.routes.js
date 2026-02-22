@@ -39,5 +39,6 @@ router.patch('/:id', isAuthenticated,
   captionsController.editCaption
 );
 
+router.delete('/:id', captionsController.deleteCaption);
 
 module.exports = router;

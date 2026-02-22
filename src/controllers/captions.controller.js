@@ -28,6 +28,24 @@ exports.editCaption = async (req, res) => {
     const error = new Error('Server error');
     error.status = 500;
     throw error;
-  }
+  };
   res.status(200).json({ message: 'Caption edited' });
+};
+
+exports.deleteCaption = async (req, res) => {
+  const userId = req.session.userId;
+  const captionId = req.params.id;
+  const captionUserId = await captionService.getCaptionUserId(captionId);
+  if (captionUserId.user_id !== userId) {
+    const error = new Error ('You can only delete your captions');
+    error.status = 403;
+    throw error;
+  };
+  const result = await captionService.deleteCaption(captionId);
+  if (result.rowCount === 0) {
+    const error = new Error('Server error');
+    error.status = 500;
+    throw error;
+  };
+  res.status(204).json({ message: 'Caption deleted' });
 };
