@@ -34,13 +34,13 @@ describe('getImageWithCaptions', () => {
     const result = await galleryService.getImageWithCaptions(id);
     expect(pool.query).toHaveBeenNthCalledWith(1, 'SELECT * FROM images WHERE id = $1', ['test']);
     expect(pool.query).toHaveBeenNthCalledWith(2,
-    `SELECT captions.id, captions.caption, users.username,
+    `SELECT captions.id, captions.caption, users.username, captions.user_id,
       COUNT(likes.id) AS like_count
       FROM captions
       INNER JOIN users ON users.id = captions.user_id
       LEFT JOIN likes ON likes.captions_id = captions.id
       WHERE captions.image_id = $1
-      GROUP BY captions.id, users.username
+      GROUP BY captions.id, users.username, captions.user_id
       ORDER BY COUNT(likes.id) DESC`,
     ['test']);     
     expect(result).toEqual({ 

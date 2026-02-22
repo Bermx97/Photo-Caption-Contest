@@ -54,7 +54,7 @@ describe('POST /caption/:id', () => {
         .post('/caption/lolek')
         .send({ newcaption: testCaption})
         expect(response.status).toBe(201);
-        expect(response.body.message).toBe('caption added');
+        expect(response.body.message).toBe('Caption added');
     });
     
     it('should return 400 if newcaption is empty', async () => {

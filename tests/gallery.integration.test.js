@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
 const galleryService = require('../src/services/gallery.service');
+const session = require('express-session');
 galleryController = require('../src/controllers/gallery.controller');
 jest.mock('../src/services/gallery.service');
 
@@ -15,7 +16,7 @@ describe('GET /', () => {
         const response = await request(app)
         .get('/gallery')
         expect(response.status).toBe(500);
-        expect(response.body.message).toBe('server error');
+        expect(response.body.message).toBe('Server error');
     });
 
     it('should return 200 and render gallery if image exist', async () => {
@@ -53,7 +54,7 @@ describe('GET /gallery/:id', () => {
     });
 
     it('should return 200 and render image with captions if image exist', async () => {
-        const req = { params: { id: 'lolek' } }
+        const req = { params: { id: 'lolek' }, session: { userId : 2 } }
         const res = { render: jest.fn() };
 
         galleryService.getImageWithCaptions.mockResolvedValue({
@@ -74,7 +75,8 @@ describe('GET /gallery/:id', () => {
             captions: [
                 { id: 6, caption: 'testCaption', user_id: 4, image_id: 'lolek' },
                 { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' }
-             ]
+             ],
+             currentUserId: req.session.userId
         });
         expect(res.render).toHaveBeenCalledTimes(1);
     });
