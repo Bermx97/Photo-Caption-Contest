@@ -6,21 +6,28 @@ exports.addCaption = async (req, res) => {
     const userId = req.session.userId
     const result = await captionService.createCaption(newcaption, userId, imageId);
     if (result.rowCount === 0) {
-      const error = new Error('server error')
+      const error = new Error('Server error')
       error.status = 500;
       throw error;
     } 
-      res.status(201).json({ message: 'caption added', data: result });
+      res.status(201).json({ message: 'Caption added', data: result });
 };
 
 exports.editCaption = async (req, res) => {
+  const userId = req.session.userId;
   const newcaption = req.body.newcaption;
   const captionId = req.params.id;
+  const captionUserId = await captionService.getCaptionUserId(captionId);
+  if (captionUserId.user_id !== userId) {
+    const error = new Error ('You can only edit your captions');
+    error.status = 403;
+    throw error;
+  };
   const result = await captionService.editCaption(newcaption, captionId);
   if (result.rowCount === 0) {
-    const error = new Error('server error')
+    const error = new Error('Server error');
     error.status = 500;
     throw error;
   }
-  res.status(200).json({ message: 'caption edited' })
-}
+  res.status(200).json({ message: 'Caption edited' });
+};

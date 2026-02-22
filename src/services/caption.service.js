@@ -5,6 +5,12 @@ exports.createCaption = async (newcaption, userId, imageId) => {
     return result.rows[0] || null;
 };
 
+exports.getCaptionUserId = async (captionId) => {
+    const result = await pool.query('SELECT user_id from captions WHERE id = $1', [captionId]);
+    return result.rows[0]
+}
+
+
 exports.editCaption = async (newcaption, captionId) => {
     const result = await pool.query('UPDATE captions SET caption = $1 WHERE id = $2 RETURNING *' , [newcaption, captionId])
     return result;
