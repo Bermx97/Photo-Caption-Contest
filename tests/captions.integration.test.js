@@ -5,9 +5,6 @@ const bcrypt = require('bcrypt');
 
 describe('POST /caption/:id', () => {
     
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
 
     let agent;
     let testUserId;

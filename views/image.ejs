@@ -14,8 +14,11 @@
       <div class="text-container">
         <h1 id="captions">Captions:</h1>
         <% captions.forEach(caption => { %>
-          <p id="caption"><%= caption.username %>: <%= caption.caption %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="like-button" data-id="<%= caption.id %>">&#128061;</button>
+          <p id="caption">
+            <%= caption.username %>: <span class="caption-text"><%= caption.caption %></span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="like-button" data-id="<%= caption.id %>">&#128061;</button>
             (<span id="like-count-<%= caption.id %>"><%= caption.like_count %></span>)
+              &nbsp;
+                <button class="edit-button" data-id="<%= caption.id %>" data-caption="<%- caption.caption.replace(/'/g, "\\'") %>">✏️</button>
           </p>
         <% }) %>
       </div>
@@ -32,6 +35,16 @@
     <form action="/logout" method="POST">
       <button type="submit" class="logout-button">Logout</button>
     </form>
+    <div id="editModal" class="modal">
+      <form id="modalForm">
+        <textarea id="modalInput" rows="1"></textarea>
+          <div class="modal-buttons">
+            <button type="submit">Save</button>
+            <button id="cancelModal" type="button">Cancel</button>
+          </div>
+        </form>
+    </div>
+    <div id="modalBackdrop"></div>
   <script src="/image/DOM.js"></script>
 </body>
 </html>

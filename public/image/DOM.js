@@ -68,3 +68,52 @@ async function likeComment(captionId) {
     console.error(error);
   }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('editModal');
+  const backdrop = document.getElementById('modalBackdrop');
+  const input = document.getElementById('modalInput');
+  const modalForm = document.getElementById('modalForm');
+  const cancelBtn = document.getElementById('cancelModal');
+  let currentId = null;
+
+  document.querySelectorAll('.edit-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentId = btn.dataset.id;
+      const p = btn.closest('p');
+      const textSpan = p.querySelector('.caption-text');
+      const text = textSpan ? textSpan.textContent : '';
+      input.value = text.trim();
+      modal.classList.add('show');
+      backdrop.classList.add('show');
+      input.focus();
+    });
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    modal.classList.remove('show');
+    backdrop.classList.remove('show');
+  });
+
+  modalForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!currentId) return;
+  try {
+    const response = await fetch(`/caption/${currentId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ newcaption: input.value, id: currentId })
+    });
+    const data = await response.json()
+    if (response.ok) {
+      window.location.reload();
+    } else {
+      alert(data.message);         
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+});
+

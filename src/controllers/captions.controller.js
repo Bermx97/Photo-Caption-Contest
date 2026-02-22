@@ -13,3 +13,14 @@ exports.addCaption = async (req, res) => {
       res.status(201).json({ message: 'caption added', data: result });
 };
 
+exports.editCaption = async (req, res) => {
+  const newcaption = req.body.newcaption;
+  const captionId = req.params.id;
+  const result = await captionService.editCaption(newcaption, captionId);
+  if (result.rowCount === 0) {
+    const error = new Error('server error')
+    error.status = 500;
+    throw error;
+  }
+  res.status(200).json({ message: 'caption edited' })
+}
