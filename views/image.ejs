@@ -18,7 +18,9 @@
             <%= caption.username %>: <span class="caption-text"><%= caption.caption %></span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="like-button" data-id="<%= caption.id %>">&#128061;</button>
             (<span id="like-count-<%= caption.id %>"><%= caption.like_count %></span>)
               &nbsp;
-                <button class="edit-button" data-id="<%= caption.id %>" data-caption="<%- caption.caption.replace(/'/g, "\\'") %>">✏️</button>
+              <% if (currentUserId && caption.user_id === currentUserId) { %>
+              <button class="edit-button" data-id="<%= caption.id %>" data-caption="<%- caption.caption.replace(/'/g, "\\'") %>">✏️</button>
+              <% } %>
           </p>
         <% }) %>
       </div>
