@@ -93,6 +93,21 @@ describe('PATCH /caption/:id', () => {
     });
 });
 
+describe('DELETE /caption/:id', () => {
+    it('should return 200 if the delete was successful', async () => {
+        const createCaption = await agent
+        .post('/caption/lolek')
+        .send({ newcaption: 'deletetest' });
+        expect(createCaption.status).toBe(201);
+        
+        const newCaptionId = createCaption.body.data.id;
+        
+        const deleteCaption = await agent
+        .delete(`/caption/${newCaptionId}`)
+        expect(deleteCaption.status).toBe(204);
+    });
+});
+
 afterAll(async () => {
     await pool.query(
         'DELETE FROM captions WHERE user_id = $1',

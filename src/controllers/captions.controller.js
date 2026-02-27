@@ -47,5 +47,5 @@ exports.deleteCaption = async (req, res) => {
     error.status = 500;
     throw error;
   };
-  res.status(204).json({ message: 'Caption deleted' });
+  res.status(204).send();
 };
