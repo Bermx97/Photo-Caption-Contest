@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error(error);
     }
-  }
+    window.location.reload();
+  };
 
   const editModal = document.getElementById('editModal');
   const editBackdrop = document.getElementById('modalBackdrop');
