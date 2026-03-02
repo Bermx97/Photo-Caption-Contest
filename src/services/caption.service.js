@@ -16,6 +16,7 @@ exports.editCaption = async (newcaption, captionId) => {
 };
 
 exports.deleteCaption = async (captionId) => {
+    const deleteLikes = await pool.query('DELETE FROM likes WHERE captions_id = $1', [captionId]);
     const result = await pool.query('DELETE FROM captions WHERE id = $1', [captionId]);
     return result;
 };

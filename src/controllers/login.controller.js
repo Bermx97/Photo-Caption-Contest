@@ -24,6 +24,7 @@ exports.login = async (req, res) => {
       }
       req.session.isAuthenticated = true;
       req.session.userId = foundUser.id; //create session
+      req.session.role = foundUser.role; //crate role
       res.status(200).json({ message: 'logged' });
 };
 

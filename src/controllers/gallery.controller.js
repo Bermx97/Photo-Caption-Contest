@@ -17,6 +17,6 @@ exports.showImage = async (req, res) => {
       error.status = 404;
       throw error;
     }
-    res.render('image', { image, captions, currentUserId: req.session.userId });
+    res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role });
 };
 

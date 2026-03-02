@@ -18,12 +18,16 @@ exports.editCaption = async (req, res) => {
   const newcaption = req.body.newcaption;
   const captionId = req.params.id;
   const captionUserId = await captionService.getCaptionUserId(captionId);
-  if (captionUserId.user_id !== userId) {
+  const role = req.session.role; 
+
+  if (captionUserId.user_id !== userId && role === 'user') {
     const error = new Error ('You can only edit your captions');
     error.status = 403;
     throw error;
   };
+
   const result = await captionService.editCaption(newcaption, captionId);
+
   if (result.rowCount === 0) {
     const error = new Error('Server error');
     error.status = 500;
@@ -36,7 +40,8 @@ exports.deleteCaption = async (req, res) => {
   const userId = req.session.userId;
   const captionId = req.params.id;
   const captionUserId = await captionService.getCaptionUserId(captionId);
-  if (captionUserId.user_id !== userId) {
+  const role = req.session.role;
+  if (captionUserId.user_id !== userId && role === 'user') {
     const error = new Error ('You can only delete your captions');
     error.status = 403;
     throw error;
