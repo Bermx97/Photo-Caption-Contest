@@ -1,6 +1,6 @@
 # Photo Caption Contest App
 
-This is a web application deployed on Render.com. It allows users to register, log in, add humorous captions to images loaded from a database, and like captions added by other users.
+This is a web application deployed on Render.com. It allows users to register, log in, add humorous captions to images loaded from a database, edit and delete their own captions, and like captions added by other users. The application also includes user roles, with standard users and admins, which control access to certain actions.
 
 
 https://github.com/user-attachments/assets/cc1e6698-8204-4af3-819f-c2afb04273b9
@@ -97,7 +97,10 @@ To run the project locally:
 
 
  
-![Database Schema](https://github.com/user-attachments/assets/c6416d4d-069d-4497-9017-0440ba4f35d9)
+<img width="1328" height="641" alt="image" src="https://github.com/user-attachments/assets/10c6d0c4-283a-4876-9508-3afcebeeb29f" />
+
+
+
 
 
 
