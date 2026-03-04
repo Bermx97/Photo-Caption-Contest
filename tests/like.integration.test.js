@@ -35,15 +35,14 @@ describe('POST /likes/:captionId', () => {
         await pool.end();
     });
 
-    it('should return 400 if user already liked this comment', async () => {
+    it('should return 204 and delete like if user already liked this comment', async () => {
         likeService.isAlreadyLiked.mockResolvedValue({
             command: 'SELECT',
             rowCount: 1,
             rows: [{ '?column?': 1 }]
         })
         const response = await agent.post('/likes/3');
-        expect(response.status).toBe(400);
-        expect(response.body.message).toBe('You already liked this comment');
+        expect(response.status).toBe(204);
     });
 
     it('should return 201 if the user added a like correctly', async () => {

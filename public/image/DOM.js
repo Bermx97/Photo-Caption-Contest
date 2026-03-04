@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("You must be logged in to like this caption");
         return;
       }
-      if (response.status === 400) {
-        const data = await response.json();
-        alert(data.error || "You already liked this caption");
+      if (response.status === 204) {
+        countSpan.textContent = parseInt(countSpan.textContent) - 1;
+        localStorage.setItem(`liked-${captionId}`, "true");
         return;
       }
       if (!response.ok) {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error(error);
     }
-    window.location.reload();
+    
   };
 
   const editModal = document.getElementById('editModal');
