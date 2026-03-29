@@ -7,7 +7,8 @@ exports.showGallery = async (req, res) => {
       error.status = 500;
       throw error;
     }
-    res.render('gallery', { images });
+    const userName = req.session?.userName || null; 
+    res.render('gallery', { images, userName });
 };
 
 exports.showImage = async (req, res) => {

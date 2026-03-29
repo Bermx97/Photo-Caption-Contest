@@ -6,6 +6,15 @@
   <link rel="stylesheet" href="/styles/gallery.css">
 </head>
 <body>
+    <% if (userName) { %>
+      <a href="/user/<%= userName %>">
+        <button class="profile-button">
+          <%= userName.charAt(0).toUpperCase() %>
+        </button>
+      </a>
+    <% } else { %>
+      <button class="profile-button">G</button>
+    <% } %>
   <div class="gallery">
     <% images.forEach(img => { %>
       <div class="gallery-item">
@@ -15,7 +24,6 @@
       </div>
     <% }) %>
   </div>
-
   <form action="/logout" method="POST" style="text-align:center; margin-top:20px;">
     <button type="submit" class="logout-button">Logout</button>
   </form>

@@ -595,21 +595,22 @@ input[type="hidden"] {
   justify-content: center;
   align-items: center;
   gap: 10%;
-  color: #999ab3a8;
+  color: #b6b7c4a8;
   font-size: 20px;
   font-family: Georgia, serif;                
 }
 
 .gallery-button {
-    pointer-events: auto;
-    border-radius: 20px;
-    cursor: pointer;
-    height: 50px;
-    width: 130px;
-    background-color: black;
-    color: #ffffff;
-    opacity: 0.6;
-    font-size: 20px;
-    margin-bottom: 5px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  border-radius: 120px;
+  background-color: black;
+  color: #b1b1c2a8;
+  font-size: 25px;
+  height: 55px;
+  width: 130px;
+  cursor: pointer;
+  opacity: 0,5;
 }
-

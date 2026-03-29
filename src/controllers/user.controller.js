@@ -4,7 +4,11 @@ const captionService = require('../services/caption.service');
 const userService = require('../services/user.service');
 
 exports.showUser = async (req, res) => {
-    const userName = req.params.id;
+    const wantedUser = req.params.id;
+    const userName = req.session.userName;
+    if (wantedUser !== userName) {
+        return res.status(403).send('You are not allowed to view this profile');
+    };
     const findUser = await loginService.findUser(userName);
     const user = findUser.rows[0];
     const totalLikesResult = await likeService.countLikesForUser(user.id);

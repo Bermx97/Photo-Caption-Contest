@@ -34,7 +34,8 @@ describe('GET /', () => {
             images: [
                 { id: 'lolek', filename: 'lolek.jpg' },
                 { id: 'koko', filename: 'koko.jpg' }
-            ]});
+            ], 
+            userName: null, });
         expect(res.render).toHaveBeenCalledTimes(1);
     });
 });
@@ -54,7 +55,7 @@ describe('GET /gallery/:id', () => {
     });
 
     it('should return 200 and render image with captions if image exist', async () => {
-        const req = { params: { id: 'lolek' }, session: { userId : 2, role: 'user' }, query: { page: 3 } }
+        const req = { params: { id: 'lolek' }, session: { userId : 2, role: 'user', userName: 'testuser' }, query: { page: 3 } }
         const res = { render: jest.fn() };
 
         galleryService.getImageWithCaptions.mockResolvedValue({
