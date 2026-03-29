@@ -1,0 +1,150 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 10px;
+  padding: 5px;
+  background-color: rgb(23, 21, 36);
+  color: #fff;
+  font-size: 18px;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.profile-card {
+  flex: 1;
+  min-width: 250px;
+  padding: 25px;
+  border-radius: 20px;
+  background-color: rgb(30, 27, 46);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+}
+
+.profile-card h2 {
+  margin: 10px 0;
+  color: #999ab3a8;
+  font-size: 32px; 
+}
+
+.profile-card p {
+  margin: 8px 0;
+  color: rgb(76, 68, 114);
+  font-size: 27px;
+}
+
+.gallery-button {
+  pointer-events: auto;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 60px;
+  width: 160px;
+  background-color: black;
+  color: #ffffff;
+  font-size: 20px;
+  margin-top: 15px;
+  opacity: 0.5;
+}
+
+
+
+.captions-list {
+  flex: 2;
+  min-width: 300px;
+  padding: 25px;
+  border-radius: 25px;
+  background-color: rgb(30, 27, 46);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.text-container::-webkit-scrollbar {
+  display: none;
+}
+
+.text-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.captions-list h3 {
+  color: #999ab3a8;
+  font-size: 28px;
+}
+
+.captions-list li {
+  color: rgb(76, 68, 114);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 22px;
+}
+
+@media (max-width: 1000px) {
+  .profile-container {
+    flex-direction: column;
+  }
+  .gallery-button {
+    width: 140px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-button {
+    width: 120px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .profile-card h2 {
+    font-size: 28px;
+  }
+  .profile-card p {
+    font-size: 20px;
+  }
+  .captions-list h3 {
+    font-size: 24px;
+  }
+  .captions-list li {
+    font-size: 20px;
+  }
+  .logout-button {
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+    bottom: 10px;
+    left: 10px;
+  }
+}
+
+.top-buttons {
+    display: flex;          
+    justify-content: center; 
+    margin-bottom: 10px;     
+}
+
+.logout-wrapper {
+  display: block;
+  width: 100%;
+  text-align: end;  
+  margin-top: 20px;
+}
+
+.logout-button {
+  border-radius: 20px;
+  background-color: black;
+  color: #fff;
+  opacity: 0.5;
+  font-size: 20px;
+  height: 55px;
+  width: 140px;
+  cursor: pointer;
+}

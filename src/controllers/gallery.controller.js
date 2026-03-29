@@ -27,4 +27,3 @@ exports.showImage = async (req, res) => {
     }
     res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role, page, totalPage });
 };
-

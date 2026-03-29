@@ -51,7 +51,9 @@ const loginRoutes = require('./src/routes/login.routes');
 const registerRoutes = require('./src/routes/register.routes');
 const homeRoutes = require('./src/routes/home.routes');
 const logoutRoutes = require('./src/routes/logout.routes');
+const userRoutes = require('./src/routes/user.routes')
 const errorHandler = require('./src/middlewares/errorHandler');
+
 
 app.use('/', homeRoutes);
 app.use('/caption', captionsRoutes);
@@ -60,6 +62,7 @@ app.use('/likes', likesRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
+app.use('/user', userRoutes);
 app.use(errorHandler);
 
 module.exports = app;

@@ -20,3 +20,8 @@ exports.deleteLike = async (captionId, userId) => {
     [captionId, userId]
   );
 };
+
+//test
+exports.countLikesForUser = async (userId) => {
+  return await pool.query('SELECT COUNT(*) FROM likes WHERE user_id = $1', [userId]);
+};
