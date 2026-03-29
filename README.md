@@ -19,6 +19,7 @@ The application is fully deployed on Render, including the database. Users can a
 - Editing and deleting your captions
 - Like other users' captions (only one like per user per caption)
 - Real-time caption sorting by popularity
+- Pagination for captions (Next/Previous navigation)
 - API documentation available at:  https://photo-caption-contest-gviy.onrender.com/api-docs/
 - Input validation and error messages
 - Security headers via Helmet
