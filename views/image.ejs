@@ -24,6 +24,15 @@
 <% } %>
           </p>
         <% }) %>
+        <div class="pagination">
+          <% if (page > 1) { %>
+            <a href="/gallery/<%= image.id %>?page=<%= page - 1 %>">Previous</a>
+          <% } %>
+          <p>Page: <%= page %> of <%= totalPage %></p>
+          <% if (page < totalPage) { %>
+            <a href="/gallery/<%= image.id %>?page=<%= page + 1 %>">Next</a>
+          <% } %>
+        </div>
       </div>
       <div class="form">
         <form id="form">

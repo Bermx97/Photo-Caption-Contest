@@ -11,12 +11,16 @@ exports.showGallery = async (req, res) => {
 };
 
 exports.showImage = async (req, res) => {
-    const { image, captions } = await galleryService.getImageWithCaptions(req.params.id);
+    const page = Number(req.query.page) || 1;
+    const limit = 5;
+    const offset = (page - 1) * limit;
+    const { image, captions, totalResult } = await galleryService.getImageWithCaptions(req.params.id, limit, offset);
     if (!image) {
       const error = new Error('Image not found');
       error.status = 404;
       throw error;
     }
-    res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role });
+    const totalPage = Math.ceil(totalResult / limit);
+    res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role, page, totalPage });
 };
 

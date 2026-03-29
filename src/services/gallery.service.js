@@ -14,7 +14,7 @@ exports.getGallery = async () => {
   return result.rows;
 };
 
-exports.getImageWithCaptions = async (id) => {
+exports.getImageWithCaptions = async (id, limit, offset) => {
   const imageResult = await pool.query(
     'SELECT * FROM images WHERE id = $1',
     [id]
@@ -28,12 +28,18 @@ exports.getImageWithCaptions = async (id) => {
       LEFT JOIN likes ON likes.captions_id = captions.id
       WHERE captions.image_id = $1
       GROUP BY captions.id, users.username, captions.user_id
-      ORDER BY COUNT(likes.id) DESC`,
-    [id]
+      ORDER BY COUNT(likes.id) DESC
+      LIMIT $2 OFFSET $3`,
+    [id, limit, offset]
+  );
+
+  const totalResult = await pool.query(
+    `SELECT COUNT(*) FROM captions WHERE image_id = $1`, [id]
   );
 
   return {
     image: imageResult.rows[0],
-    captions: captionsResult.rows
+    captions: captionsResult.rows,
+    totalResult: totalResult.rows[0].count
   };
 };
