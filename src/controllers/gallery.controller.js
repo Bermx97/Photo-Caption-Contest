@@ -11,7 +11,8 @@ exports.showGallery = async (req, res) => {
 };
 
 exports.showImage = async (req, res) => {
-    const page = Number(req.query.page) || 1;
+    let page = Number(req.query.page) || 1;
+    if (page < 1) page = 1;
     const limit = 5;
     const offset = (page - 1) * limit;
     const { image, captions, totalResult } = await galleryService.getImageWithCaptions(req.params.id, limit, offset);
@@ -21,6 +22,9 @@ exports.showImage = async (req, res) => {
       throw error;
     }
     const totalPage = Math.ceil(totalResult / limit);
+    if (page > totalPage && totalPage > 0) {
+      return res.redirect(`/gallery/${req.params.id}?page=${totalPage}`);
+    }
     res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role, page, totalPage });
 };
 

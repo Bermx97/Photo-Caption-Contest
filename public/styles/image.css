@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 30px;
+  margin: 10px;
   padding: 5px;
   background-color: rgb(23, 21, 36);
 }
@@ -14,7 +14,7 @@ body {
     width: 140px;
     background-color: black;
     color: #ffffff;
-    opacity: 0.3;
+    opacity: 0.5;
     font-size: 20px;
     margin-bottom: 45px;
 }
@@ -105,6 +105,12 @@ body {
     height: 40px;
     width: 100px;
     font-size: 18px;
+  }
+
+  .gallery-button {
+    font-size: 15px !important;
+    height: 35px !important;
+    width: 100px !important;
   }
   body {
     background-color: rgb(30, 27, 46);
@@ -593,3 +599,17 @@ input[type="hidden"] {
   font-size: 20px;
   font-family: Georgia, serif;                
 }
+
+.gallery-button {
+    pointer-events: auto;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 50px;
+    width: 130px;
+    background-color: black;
+    color: #ffffff;
+    opacity: 0.6;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
