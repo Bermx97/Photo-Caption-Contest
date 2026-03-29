@@ -20,7 +20,7 @@ describe('GET /', () => {
     });
 
     it('should return 200 and render gallery if image exist', async () => {
-        const req = {}
+        const req = { query: { page: 3 }}
         const res = { render: jest.fn() };
 
         galleryService.getGallery.mockResolvedValue([{ id:'lolek', filename:'lolek.jpg' }, { id:'koko', filename:'koko.jpg' }]);
@@ -54,19 +54,18 @@ describe('GET /gallery/:id', () => {
     });
 
     it('should return 200 and render image with captions if image exist', async () => {
-        const req = { params: { id: 'lolek' }, session: { userId : 2 } }
+        const req = { params: { id: 'lolek' }, session: { userId : 2, role: 'user' }, query: { page: 3 } }
         const res = { render: jest.fn() };
 
         galleryService.getImageWithCaptions.mockResolvedValue({
              image: { id: 'lolek', filename: 'lolek.jpg' },
              captions: [
                 { id: 6, caption: 'testCaption', user_id: 4, image_id: 'lolek' },
-                { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' }
-             ]
+                { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' },
+             ],
+             totalResult: 50
             });
-        
         await galleryController.showImage(req, res);
-
         const response = await request(app)
         .get('/gallery/lolek')
         expect(response.status).toBe(200);
@@ -76,7 +75,10 @@ describe('GET /gallery/:id', () => {
                 { id: 6, caption: 'testCaption', user_id: 4, image_id: 'lolek' },
                 { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' }
              ],
-             currentUserId: req.session.userId
+             currentUserId: req.session.userId,
+             currentUserRole: req.session.role,
+             page: 3,
+             totalPage: 10
         });
         expect(res.render).toHaveBeenCalledTimes(1);
     });

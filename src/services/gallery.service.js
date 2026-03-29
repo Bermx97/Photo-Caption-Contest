@@ -16,8 +16,7 @@ exports.getGallery = async () => {
 
 exports.getImageWithCaptions = async (id, limit, offset) => {
   const imageResult = await pool.query(
-    'SELECT * FROM images WHERE id = $1',
-    [id]
+    'SELECT * FROM images WHERE id = $1',[id]
   );
 
   const captionsResult = await pool.query(

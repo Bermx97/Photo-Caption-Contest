@@ -30,9 +30,16 @@ describe('getImageWithCaptions', () => {
     .mockResolvedValueOnce({
         rows: [{ id: 'test', caption: 'testcaption', username: 'testUser', like_count: 4 }]
     })
+    .mockResolvedValueOnce({
+        rows: [{ count: 20 }]
+    })
+    const req = { query: { page: 3 } }
+    const page = Number(req.query.page) || 1;
+    const limit = 5;
+    const offset = (page - 1) * limit;
     const id = 'test'
-    const result = await galleryService.getImageWithCaptions(id);
-    expect(pool.query).toHaveBeenNthCalledWith(1, 'SELECT * FROM images WHERE id = $1', ['test']);
+    const result = await galleryService.getImageWithCaptions(id, limit, offset);
+    expect(pool.query).toHaveBeenNthCalledWith(1, 'SELECT * FROM images WHERE id = $1',[id]);
     expect(pool.query).toHaveBeenNthCalledWith(2,
     `SELECT captions.id, captions.caption, users.username, captions.user_id,
       COUNT(likes.id) AS like_count
@@ -41,11 +48,14 @@ describe('getImageWithCaptions', () => {
       LEFT JOIN likes ON likes.captions_id = captions.id
       WHERE captions.image_id = $1
       GROUP BY captions.id, users.username, captions.user_id
-      ORDER BY COUNT(likes.id) DESC`,
-    ['test']);     
+      ORDER BY COUNT(likes.id) DESC
+      LIMIT $2 OFFSET $3`,
+    [id, limit, offset]);
+    expect(pool.query).toHaveBeenNthCalledWith(3, `SELECT COUNT(*) FROM captions WHERE image_id = $1`, [id])
     expect(result).toEqual({ 
         image: { id: 'test', filename: 'test.jpg' },
-        captions: [{ id: 'test', caption: 'testcaption', username: 'testUser', like_count: 4 }]
+        captions: [{ id: 'test', caption: 'testcaption', username: 'testUser', like_count: 4 }],
+        totalResult: 20
     });   
   });
 });
