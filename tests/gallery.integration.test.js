@@ -76,6 +76,7 @@ describe('GET /gallery/:id', () => {
                 { id: 6, caption: 'testCaption', user_id: 4, image_id: 'lolek' },
                 { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' }
              ],
+             userName: 'testuser',
              currentUserId: req.session.userId,
              currentUserRole: req.session.role,
              page: 3,

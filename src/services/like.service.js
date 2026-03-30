@@ -21,7 +21,6 @@ exports.deleteLike = async (captionId, userId) => {
   );
 };
 
-//test
 exports.countLikesForUser = async (userId) => {
   return await pool.query('SELECT COUNT(likes.id) AS total_likes FROM captions LEFT JOIN likes ON likes.captions_id = captions.id WHERE captions.user_id = $1', 
   [userId]);

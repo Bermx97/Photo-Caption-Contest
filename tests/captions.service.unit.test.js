@@ -55,3 +55,15 @@ describe('deleteCaption', () => {
         expect(result.rows[0]).toEqual({ id: 8, caption: 'testing', user_id: 3, image_id: 'lolek' });
     });
 });
+
+describe('countCaptionsForUser', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+  });
+  it('should count all user`s captions', async () => {
+    mockPool.query.mockResolvedValue({ rows: { count: 8 } });
+    const result = await captionsService.countCaptionsForUser(3);
+    expect(mockPool.query).toHaveBeenCalledWith('SELECT COUNT(*) FROM captions WHERE user_id = $1', [3]);
+    expect(result.rows).toEqual({ count: 8 });
+  });
+});

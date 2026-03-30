@@ -21,7 +21,6 @@ exports.deleteCaption = async (captionId) => {
     return result;
 };
 
-//test
 exports.countCaptionsForUser = async (userId) => {
   return await pool.query('SELECT COUNT(*) FROM captions WHERE user_id = $1', [userId]);
 };

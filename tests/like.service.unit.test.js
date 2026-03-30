@@ -32,3 +32,32 @@ describe('addLike', () => {
         });
     });
 });
+
+describe('deleteLike', () => {
+    it('should return success response after deleting like', async () => {
+        pool.query.mockResolvedValue({
+            command: 'DELETE',
+            rowCount: 1,
+            rows: [],
+            fields: []
+        });
+        const result = await likeService.deleteLike(3, 5);
+        expect(pool.query).toHaveBeenCalledWith('DELETE FROM likes WHERE captions_id = $1 AND user_id = $2', [3, 5]);
+        expect(result).toEqual({
+            command: 'DELETE',
+            rowCount: 1,
+            rows: [],
+            fields: []
+        });
+    });
+});
+
+describe('countLikesForUser', () => {
+    it('should return how many likes user have', async () => {
+        pool.query.mockResolvedValue({ rows: { total_likes: 50 } });
+        const result = await likeService.countLikesForUser(1);
+        expect(pool.query).toHaveBeenCalledWith('SELECT COUNT(likes.id) AS total_likes FROM captions LEFT JOIN likes ON likes.captions_id = captions.id WHERE captions.user_id = $1', 
+        [1]);
+        expect(result).toEqual({ rows: { total_likes: 50 } });
+    });
+});
