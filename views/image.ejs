@@ -6,6 +6,15 @@
   <link rel="stylesheet" href="/styles/image.css">
 </head>
 <body>
+  <% if (userName) { %>
+      <a href="/user/<%= userName %>">
+        <button class="profile-button">
+          <%= userName.charAt(0).toUpperCase() %>
+        </button>
+      </a>
+    <% } else { %>
+      <button class="profile-button">G</button>
+    <% } %>
   <a href="/gallery"><button id ='gallery-button' class="gallery-button">Gallery</button></a>
   <div class="container">
     <div class="left-column">

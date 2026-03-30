@@ -12,7 +12,7 @@ exports.showUser = async (req, res) => {
     const findUser = await loginService.findUser(userName);
     const user = findUser.rows[0];
     const totalLikesResult = await likeService.countLikesForUser(user.id);
-    const totalLikes = (totalLikesResult.rows[0].count);
+    const totalLikes = (totalLikesResult.rows[0].total_likes);
     const totalCaptionsResult = await captionService.countCaptionsForUser(user.id);
     const totalCaptions = (totalCaptionsResult.rows[0].count);
     const captions = await userService.getUserCaptions(user.id);

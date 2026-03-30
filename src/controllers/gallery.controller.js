@@ -26,5 +26,6 @@ exports.showImage = async (req, res) => {
     if (page > totalPage && totalPage > 0) {
       return res.redirect(`/gallery/${req.params.id}?page=${totalPage}`);
     }
-    res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role, page, totalPage });
+    const userName = req.session?.userName || null;
+    res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role, page, totalPage, userName });
 };

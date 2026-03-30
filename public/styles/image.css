@@ -7,7 +7,7 @@ body {
 
 .logout-button {
     pointer-events: auto;
-    float: inline-start;
+    float: right;
     border-radius: 20px;
     cursor: pointer;
     height: 55px;
@@ -100,6 +100,20 @@ body {
     margin-top: 0;
 }
 
+.profile-button {
+  top: 20px;
+  right: 20px;
+  position: fixed;
+  z-index: 10;
+  border-radius: 120px;
+  background-color: black;
+  color: #fff;
+  font-size: 25px;
+  height: 75px;
+  width: 75px;
+  cursor: pointer;
+}
+
 @media (max-width: 1000px) {
   .logout-button {
     height: 40px;
@@ -172,7 +186,11 @@ body {
   gap: 5%;
   font-size: 20px!important;
   }
-
+  .profile-button {
+    font-size: 25px;
+    height: 70px;
+    width: 70px;
+  }
 }
 
 #captions {
@@ -232,6 +250,11 @@ body {
   .pagination {
   gap: 3%;
   font-size: 15px!important;
+  }
+  .profile-button {
+    font-size: 17px;
+    height: 55px;
+    width: 55px;
   }
 }
 
