@@ -14,7 +14,7 @@ body {
 
 .logout-button {
     pointer-events: auto;
-    float: left;
+    float: right;
     border-radius: 20px;
     cursor: pointer;
     height: 55px;
