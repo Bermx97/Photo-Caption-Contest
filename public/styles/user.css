@@ -126,9 +126,10 @@ body {
 }
 
 .top-buttons {
-    display: flex;          
-    justify-content: center; 
-    margin-bottom: 10px;     
+  max-width: 1200px;        /* taka sama szerokość jak container */
+  margin: 0 auto 10px auto; /* wycentrowanie + odstęp */
+  display: flex;
+  justify-content: flex-start; /* lewa strona */
 }
 
 .logout-wrapper {

@@ -14,18 +14,18 @@ body {
 
 .logout-button {
     pointer-events: auto;
-    float: right;
+    float: left;
     border-radius: 20px;
     cursor: pointer;
     height: 55px;
     width: 140px;
     background-color: black;
     color: #ffffff;
-    opacity: 0.3;
+    opacity: 0.5;
     font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 45px;
-    margin-right: 30px;
+    margin-top: -23px;
+    margin-right: 25px;
+    margin-bottom: 15px;
 }
 
 .gallery-item {
