@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
+  <title><%= username %>'s Profile</title>
   <link rel="stylesheet" href="/styles/user.css">
 </head>
 <body>
@@ -24,14 +24,18 @@
 -->
     </div>
     <div class="captions-list text-container">
-    <h3>My Captions</h3>
-    <ul id="user-captions">
-        <% captions.forEach(caption => { %>
-        <li>
-            <span class="caption-text"><%= caption.caption %></span>
-        </li>
-        <% }) %>
-    </ul>
+      <% if (username === loggedUser) { %> 
+          <h3>My Captions</h3>
+        <% } else { %>
+          <h3><%= username %>'s Captions</h3>
+        <% } %>
+      <ul id="user-captions">
+          <% captions.forEach(caption => { %>
+          <li>
+              <span class="caption-text"><%= caption.caption %></span>
+          </li>
+          <% }) %>
+      </ul>
     </div>
     <div class="logout-wrapper">
     <form action="/logout" method="POST">

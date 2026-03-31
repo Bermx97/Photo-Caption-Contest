@@ -25,7 +25,7 @@
         <h1 id="captions">Captions:</h1>
         <% captions.forEach(caption => { %>
           <p id="caption">
-            <%= caption.username %>: <span class="caption-text"><%= caption.caption %></span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="like-button" data-id="<%= caption.id %>">&#128061;</button>
+            <a class="user-link" href="/user/<%= caption.username %>"><%= caption.username %></a>: <span class="caption-text"><%= caption.caption %></span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="like-button" data-id="<%= caption.id %>">&#128061;</button>
             (<span id="like-count-<%= caption.id %>"><%= caption.like_count %></span>)
               &nbsp;
 <% if (currentUserId && (caption.user_id === currentUserId || currentUserRole === 'admin')) { %>
