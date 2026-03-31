@@ -1,19 +1,8 @@
 # Photo Caption Contest App
 
-This is a web application deployed on Render.com. It allows users to register, log in, add humorous captions to images loaded from a database, edit and delete their own captions, like captions added by other users, and browse captions with pagination. The application also includes user roles, with standard users and admins, which control access to certain actions.
-
-                                                   
-
-
-
+This is a web application deployed on Render.com. It allows users to register, log in, add humorous captions to images stored in a database, edit and delete their own captions, like captions added by other users, and browse captions with pagination. The application also includes user roles, with standard users and admins, which control access to certain actions. Users can also view profile pages that display username, role, total captions added, and total likes received. Additionally, users can visit other profiles by clicking on usernames displayed next to captions.
 
 https://github.com/user-attachments/assets/e58bd78a-6aae-4be0-8fed-662ba955e32c
-
-
-
-
-
-
 
 ## Live Application
 
@@ -30,12 +19,16 @@ The application is fully deployed on Render, including the database. Users can a
 - Real-time caption sorting by popularity
 - Implemented server-side pagination for captions (limit & offset)
 - Added dynamic Next/Previous navigation with page validation
+- User profile page with statistics (total captions, total likes)
+- View other users' profiles via username links
 - API documentation available at:  https://photo-caption-contest-gviy.onrender.com/api-docs/
 - Input validation and error messages
 - Security headers via Helmet
 - Session-based authentication using express-session
 - The application is fully responsive and adapts to different screen sizes.
 - Automated tests for controllers, service and endpoints (run locally with `npm test`)
+- Role-based access control (user/admin)
+- Dynamic rendering with EJS
   
 ## Technology Stack
 
