@@ -61,7 +61,7 @@ Services: database queries, validation logic, likes handling
 
 Endpoints: authentication, adding captions, liking captions, gallery display, user profile pages
 
-Tests example:
+Test examples:
 
 <img width="1523" height="812" alt="Zrzut ekranu 2026-04-02 112908" src="https://github.com/user-attachments/assets/fd7a1bb8-7184-46d3-a499-641ffeb30cce" />
 <img width="958" height="261" alt="Zrzut ekranu 2026-04-02 113208" src="https://github.com/user-attachments/assets/6126b6b5-5354-4d4f-88e5-deae737e16f8" />
