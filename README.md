@@ -47,6 +47,7 @@ The API is documented with Swagger and can be explored at https://photo-caption-
 ## Testing
 
 The project includes unit and integration tests covering all controllers, services, and endpoints.
+Tests ensure that the application logic works correctly and endpoints behave as expected.
 
 Run tests locally:
 - npm install
@@ -54,15 +55,18 @@ Run tests locally:
 
 What is tested:
 
-Controllers: login, register, captions, likes, gallery
+Controllers: login, register, captions, likes, gallery, user
 
 Services: database queries, validation logic, likes handling
 
-Endpoints: authentication, adding captions, liking captions, gallery display
+Endpoints: authentication, adding captions, liking captions, gallery display, user profile pages
 
-Test example:
+Tests example:
 
-<img width="1053" height="564" alt="image" src="https://github.com/user-attachments/assets/56edff23-f0e8-4d59-bb85-9336cb33900c" />
+<img width="1523" height="812" alt="Zrzut ekranu 2026-04-02 112908" src="https://github.com/user-attachments/assets/fd7a1bb8-7184-46d3-a499-641ffeb30cce" />
+<img width="958" height="261" alt="Zrzut ekranu 2026-04-02 113208" src="https://github.com/user-attachments/assets/6126b6b5-5354-4d4f-88e5-deae737e16f8" />
+
+
 
 
 ## Security
