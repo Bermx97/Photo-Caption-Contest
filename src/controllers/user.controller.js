@@ -6,7 +6,7 @@ const userService = require('../services/user.service');
 exports.showUser = async (req, res) => {
     const wantedUser = req.params.id;
     const findUser = await loginService.findUser(wantedUser);
-    const loggedUser = req.session.userName
+    const loggedUser = req.session.userName || null;
     if (!findUser.rows[0]) {
         const error = new Error('User not found');
         error.status = 404;
