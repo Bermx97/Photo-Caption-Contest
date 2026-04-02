@@ -22,9 +22,7 @@ describe('showUser', () => {
         await expect(userController.showUser(req, res))
         .rejects.toMatchObject({ message: 'User not found', status: 404 });
         expect(res.render).not.toHaveBeenCalled();
-
-
-    })
+    });
 
     it('should render user`s page if user existed', async () => {
         const req = {  params: { id: 'Test' }, session: { userName: 'dwe' } };

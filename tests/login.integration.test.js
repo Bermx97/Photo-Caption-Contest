@@ -25,7 +25,7 @@ describe('POST /login', () => {
         expect(response.body.message).toBe('Password is required');
     });
 
-    it('should return 401 if user is not finded', async () => {
+    it('should return 401 if user is not found', async () => {
         loginService.findUser.mockResolvedValue({ rows: [] })
         const response = await request(app)
         .post('/login')
