@@ -18,10 +18,10 @@
       <p>Role: <span id="role"><%= role %></span></p>
       <p>Captions added: <span id="captions-count"><%= totalCaptions %></span></p>
       <p>Total likes: <span id="likes-count"><%= totalLikes %></span>&nbsp;&#128061;</p>
-      <!--
-      <button id="edit-nickname" class="gallery-button">Edit Nickname</button>
-      <button id="edit-password" class="gallery-button">Edit Password</button>
--->
+      <% if (username === loggedUser) { %> 
+          <button id="edit-nickname" class="gallery-button">Edit Nickname</button>
+          <button id="edit-password" class="gallery-button">Edit Password</button>
+        <% } %>
     </div>
     <div class="captions-list text-container">
       <% if (username === loggedUser) { %> 
@@ -38,9 +38,25 @@
       </ul>
     </div>
     <div class="logout-wrapper">
-    <form action="/logout" method="POST">
+      <form action="/logout" method="POST">
         <button type="submit" class="logout-button">Logout</button>
-    </form>
+      </form>
     </div>
+      <div id="modalBackdrop"></div>
+      <div id="nickname-modal">
+        <div id="modalContent">
+          <span id="close-modal">X</span>
+          <form id="nickname-form">
+            <input type="text" id="modalInput" placeholder="New nickname" class="modal-field nickname-field">
+            <input type="password" id="currentPassword" placeholder="Current password" class="modal-field password-field" style="display:none;">
+            <input type="password" id="newPassword" placeholder="New password" class="modal-field password-field" style="display:none;">
+            <div>
+              <button type="submit">Save</button>
+              <button type="button" id="cancelBtn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    <script src="/image/DOM_user.js"></script>
 </body>
 </html>
