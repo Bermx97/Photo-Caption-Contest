@@ -43,7 +43,7 @@ form.addEventListener('submit', async (e) => {
 
   if (currentAction === 'nickname') {
     url = '/user/edit-nickname';
-    body = { value: document.getElementById('modalInput').value };
+    body = { newNickname: document.getElementById('modalInput').value };
   } else if (currentAction === 'password') {
     url = '/user/edit-password';
     body = {
@@ -53,19 +53,25 @@ form.addEventListener('submit', async (e) => {
   }
 
   try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
 
-    if (response.ok) {
-      if (currentAction === 'nickname') {
-        document.getElementById('user-nickname').textContent = body.value;
-      }
-      closeModal();
+  if (response.ok) {
+    const data = await response.json();
+
+    if (currentAction === 'nickname') {
+      document.getElementById('username').textContent = data.nickname;
     }
-  } catch (err) {
-    console.error(err);
+    closeModal();
+  } else {
+    const errorData = await response.json();
+    alert(errorData.message);
   }
+} catch (err) {
+  console.error(err);
+  alert('Server error');
+} 
 });

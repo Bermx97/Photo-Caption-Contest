@@ -25,7 +25,7 @@ describe('POST /register', () => {
         .post('/register')
         .send({ username: 'Test' });
         expect(response.status).toBe(400);
-        expect(response.body.message).toBe('Password must be at least 6 characters long');
+        expect(response.body.message).toBe('Password must be at least 6-25 characters long');
     });
 
     it('should return 409 if username already taken', async () => {

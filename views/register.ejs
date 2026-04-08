@@ -11,10 +11,10 @@
       <form id="registerform" method="POST">
         <h2 id="register">Create new account</h2>
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" maxlength="20" required>
+        <input type="text" id="username" name="username" minlength="3" maxlength="20" required>
         <div id="username-error" class="error-message"></div>
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" minlength="6" required>
+        <input type="password" id="password" name="password" minlength="6" maxlength="25" required>
         <button id="button" type="submit">Register</button>
         <button id="buttongallery" type="button" >Continue as guest </button>
         <div id="password-error" class="error-message"></div>

@@ -20,3 +20,21 @@ exports.showUser = async (req, res) => {
     const captions = await userService.getUserCaptions(user.id);
     res.render('user', { username: user.username, role: user.role, totalLikes, totalCaptions, captions, loggedUser: loggedUser });
 };
+
+exports.editUsername = async (req, res, next) => {
+    try {
+        const user = req.session.userName || null;
+        const newNickname = req.body.newNickname;
+        const result = await userService.editUsername(user, newNickname);
+    if (result.rows.length === 0) {
+        const err = new Error('User not found');
+        err.status = 404;
+        throw err;
+    };
+    req.session.userName = result.rows[0].username;
+    res.status(200).json({ nickname: result.rows[0].username });
+
+    } catch (err) {
+    next(err);
+  }
+}

@@ -11,7 +11,7 @@ describe('GET /user/:id', () => {
     
     it('should return 200 when user exists', async () => {
         const response = await request(app)
-        .get('/user/Lukasz')
+        .get('/user/Łukasz')
         expect(response.status).toBe(200);
     });
 });

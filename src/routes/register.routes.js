@@ -9,11 +9,11 @@ router.post('/',
     body('username')
     .isLength({ min: 3, max: 20 })
     .withMessage('username must be 3-20 characters long')
-    .isAlphanumeric()
+    .matches(/^[a-zA-Z0-9ąćęłńóśżźĄĆĘŁŃÓŚŻŹ]+$/)
     .withMessage('Username must contain only letters and numbers'),
     body('password')
-    .isLength({ min: 6 })
-    .withMessage('Password must be at least 6 characters long')
+    .isLength({ min: 6, max: 25 })
+    .withMessage('Password must be at least 6-25 characters long')
     .matches(/[A-Z]/)
     .withMessage('Password must contain at least one uppercase letter'),
     validateRequest, registerController.register);
