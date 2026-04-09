@@ -11,7 +11,7 @@ exports.showUser = async (req, res) => {
         const error = new Error('User not found');
         error.status = 404;
         throw error;
-    }
+    };
     const user = findUser.rows[0];
     const totalLikesResult = await likeService.countLikesForUser(user.id);
     const totalLikes = (totalLikesResult.rows[0].total_likes);
@@ -35,6 +35,11 @@ exports.editUsername = async (req, res, next) => {
     res.status(200).json({ nickname: result.rows[0].username });
 
     } catch (err) {
+        if (err.code === '23505') {
+        const error = new Error('Username already taken');
+        error.status = 400;
+        return next(error);
+    }
     next(err);
   }
 }

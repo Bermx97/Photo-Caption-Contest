@@ -103,6 +103,10 @@ body {
 }
 
 @media (max-width: 600px) {
+  .form-message {
+  font-size: 15px !important;
+  }
+
   #nickname-modal {
     width: 80% !important;
     height: 22% !important; 
@@ -284,4 +288,18 @@ body {
 
 .modal-field::placeholder {
   color: #130229;
+}
+
+#success-form-message{
+  margin-top: 25px;
+}
+
+.form-message {
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+#edit-password{
+  display: none;
 }

@@ -19,11 +19,10 @@
       <p>Captions added: <span id="captions-count"><%= totalCaptions %></span></p>
       <p>Total likes: <span id="likes-count"><%= totalLikes %></span>&nbsp;&#128061;</p>
       <% if (username === loggedUser) { %> 
-          <button id="edit-nickname" class="gallery-button">Edit Nickname</button>
-          <!--
+          <button id="edit-nickname" class="gallery-button">Edit Username</button>
           <button id="edit-password" class="gallery-button">Edit Password</button>
-          -->
-        <% } %>
+          <% } %>
+          <p id="success-form-message" class="form-message"></p>
     </div>
     <div class="captions-list text-container">
       <% if (username === loggedUser) { %> 
@@ -50,14 +49,13 @@
           <span id="close-modal">X</span>
           <form id="nickname-form">
             <input type="text" name="newNickname" id="modalInput" placeholder="New nickname" class="modal-field nickname-field" maxlength="20" minlength="3" >
-            <!--
             <input type="password" name="currentPassword" id="currentPassword" placeholder="Current password" class="modal-field password-field" style="display:none;" minlength="6" maxlength="25">
             <input type="password" name="newPassword" id="newPassword" placeholder="New password" class="modal-field password-field" style="display:none;" minlength="6" maxlength="25">
-          -->
             <div>
               <button type="submit">Save</button>
               <button type="button" id="cancelBtn">Cancel</button>
             </div>
+            <p id="error-form-message" class="form-message"></p>
           </form>
         </div>
       </div>

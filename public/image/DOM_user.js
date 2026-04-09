@@ -59,8 +59,14 @@ form.addEventListener('submit', async (e) => {
     body: JSON.stringify(body)
   });
 
+  const successMessageEl = document.getElementById('success-form-message');
+  const errorMessageEl = document.getElementById('error-form-message');
+
   if (response.ok) {
     const data = await response.json();
+    successMessageEl.textContent = 'Updated successfully';
+    successMessageEl.style.color = '#4CAF50';
+
 
     if (currentAction === 'nickname') {
       document.getElementById('username').textContent = data.nickname;
@@ -68,10 +74,12 @@ form.addEventListener('submit', async (e) => {
     closeModal();
   } else {
     const errorData = await response.json();
-    alert(errorData.message);
+    document.getElementById('error-form-message').textContent = errorData.message;
+    errorMessageEl.style.color = '#ff6b6b';
   }
 } catch (err) {
   console.error(err);
-  alert('Server error');
+  document.getElementById('error-form-message').textContent = 'Server error';
+  errorMessageEl.style.color = '#ff6b6b';
 } 
 });
