@@ -36,9 +36,9 @@ exports.editUsername = async (req, res, next) => {
 
     } catch (err) {
         if (err.code === '23505') {
-        const error = new Error('Username already taken');
-        error.status = 400;
-        return next(error);
+        const err = new Error('Username already taken');
+        err.status = 400;
+        return next(err);
     }
     next(err);
   }
