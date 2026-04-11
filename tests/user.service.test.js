@@ -19,3 +19,14 @@ describe('getUserCaptions', () => {
         ]);
     });
 });
+
+describe('editUsername', () => {
+    it('should return edited username', async () => {
+        pool.query.mockResolvedValue(
+            { rows: { nickname: 'newUsername' } }
+        );
+        const result = await userService.editUsername('oldUsername', 'newUsername')
+        expect(pool.query).toHaveBeenCalledWith(`UPDATE users SET username = $1 WHERE username = $2 RETURNING username`, ['newUsername', "oldUsername"]);
+        expect(result).toEqual({ rows: { nickname: 'newUsername' } });
+    });
+});
