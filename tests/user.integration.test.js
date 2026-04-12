@@ -32,7 +32,7 @@ describe('GET /user/:id', () => {
     
     it('should return 200 when user exists', async () => {
         const response = await request(app)
-        .get('/user/Łukasz')
+        .get('/user/Admin')
         expect(response.status).toBe(200);
     });
 });

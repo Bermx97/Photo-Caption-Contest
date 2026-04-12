@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
+    "test": "cross-env NODE_ENV=test DATABASE_URL=postgres://postgres:postgres@localhost:5432/testdb jest --detectOpenHandles",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
