@@ -17,7 +17,24 @@ INSERT INTO users (id, username, password, role) VALUES
 (19, 'Anna', 'hashed_password_2', 'user'),
 (20, 'John', 'hashed_password_3', 'user'),
 (21, 'admin1', 'hashed_password_4', 'admin'),
-(22, 'maria', 'hashed_password_5', 'user');
+(23, 'maria', 'hashed_password_5', 'user');
+
+
+INSERT INTO captions (id, caption, user_id, image_id) VALUES
+(1,'first!', 18, 'lolek');
+
+INSERT INTO captions (id, caption, user_id, image_id) VALUES
+(33, 'So cute', 17, 'lolek'),
+(34, 'This pig is living its best life', 17, 'pig'),
+(36, 'Deer looking straight into my soul', 18, 'deer'),
+(37, 'Ram about to start a fight', 19, 'ram'),
+(38, 'Woodpecker on a mission', 19, 'woodpecker'),
+(39, 'Ducks squad goals', 20, 'ducks'),
+(40, 'Frog chilling like a boss', 17, 'frog'),
+(42, 'Lama drama incoming', 17, 'lama'),
+(32, 'Lolek is suspicious today', 21, 'lolek'),
+(43, 'Pig1 but make it cinematic', 18, 'pig1'),
+(44, 'Turtle speed = ultimate patience', 22, 'turtle');
 
 INSERT INTO likes (captions_id, user_id) VALUES
 (33, 22),
@@ -31,20 +48,3 @@ INSERT INTO likes (captions_id, user_id) VALUES
 (42, 17),
 (42, 22),
 (33, 17);
-
-
-INSERT INTO captions (caption, user_id, image_id) VALUES
-('So cute', 17, 'lolek'),
-('This pig is living its best life', 17, 'pig'),
-('Deer looking straight into my soul', 18, 'deer'),
-('Ram about to start a fight', 19, 'ram'),
-('Woodpecker on a mission', 19, 'woodpecker'),
-('Ducks squad goals', 20, 'ducks'),
-('Frog chilling like a boss', 17, 'frog'),
-('Lama drama incoming', 17, 'lama'),
-('Lolek is suspicious today', 21, 'lolek'),
-('Pig1 but make it cinematic', 18, 'pig1'),
-('Turtle speed = ultimate patience', 22, 'turtle');
-
-INSERT INTO captions (id, caption, user_id, image_id) VALUES
-(1,'first!', 18, 'lolek');
