@@ -71,7 +71,7 @@ describe('PATCH /caption/:id', () => {
 
     it('should return 403 if the user tries to edit a comment that is not theirs', async () => {
         const response = await agent
-        .patch('/caption/1')
+        .patch('/caption/2')
         .send({ newcaption: 'testing' });
         expect(response.status).toBe(403);
         expect(response.body.message).toBe('You can only edit your captions');
