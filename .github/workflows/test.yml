@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run tests
 
 on:
   push:
@@ -26,20 +26,23 @@ jobs:
           --health-retries=5
 
     env:
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
       NODE_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install dependencies
         run: npm install
+
+      - name: Setup database schema
+        run: psql $DATABASE_URL -f db/schema.sql
 
       - name: Run tests
         run: npm test
