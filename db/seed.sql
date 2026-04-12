@@ -10,14 +10,14 @@ INSERT INTO images (id, filename) VALUES
 ('pig1', '/pig1.jpg'),
 ('turtle', '/turtle.jpg');
 
-INSERT INTO users (username, password, role) VALUES
-('Admin', 'password'),
-('Łukasz', 'testpassword', 'admin'), 
-('Lukasz', 'hashed_password_1', 'user'),
-('Anna', 'hashed_password_2', 'user'),
-('John', 'hashed_password_3', 'user'),
-('admin1', 'hashed_password_4', 'admin'),
-('maria', 'hashed_password_5', 'user');
+INSERT INTO users (id, username, password, role) VALUES
+(22, 'Admin', 'password', 'user'),
+(17, 'Łukasz', 'testpassword', 'admin'), 
+(18, 'Lukasz', 'hashed_password_1', 'user'),
+(19, 'Anna', 'hashed_password_2', 'user'),
+(20, 'John', 'hashed_password_3', 'user'),
+(21, 'admin1', 'hashed_password_4', 'admin'),
+(22, 'maria', 'hashed_password_5', 'user');
 
 INSERT INTO likes (captions_id, user_id) VALUES
 (33, 22),
