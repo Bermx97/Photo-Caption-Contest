@@ -44,6 +44,7 @@ jobs:
 
       - name: Setup database schema
         run: psql $DATABASE_URL -f db/schema.sql
+        run: psql $DATABASE_URL -f db/seed.sql
 
       - name: Run tests
         run: npm test
