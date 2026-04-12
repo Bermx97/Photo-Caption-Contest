@@ -28,6 +28,7 @@ jobs:
     env:
       NODE_ENV: test
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
+      SESSION_SECRET: test-secret
 
     steps:
       - name: Checkout repo

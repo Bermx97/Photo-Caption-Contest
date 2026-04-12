@@ -1,12 +1,14 @@
-
-/db/
-/data/
-/tmp/
-
-
-*.sqlite
-
-
+# system
 .env
-
 node_modules/
+
+# temp
+/tmp/
+/data/
+
+# database
+db/*
+!db/schema.sql
+
+# sqlite
+*.sqlite
