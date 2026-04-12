@@ -30,27 +30,45 @@ The application is fully deployed on Render, including the database. Users can a
 - Automated tests for controllers, service and endpoints (run locally with `npm test`)
 - Role-based access control (user/admin)
 - Dynamic rendering with EJS
+- Automated testing with CI (GitHub Actions)
+- Environment-based configuration
   
 ## Technology Stack
 
 - ******Backend:****** Node.js, Express.js
-- ****Database:**** PostgreSQL (hosted on Render)
+- ****Database:**** PostgreSQL (hosted on Render), node-postgres (pg)
 - ****Templating Engine:**** EJS
 - ****Authentication:**** express-session, bcrypt
 - ****Validation & Security:**** express-validator, helmet
 - ****API Docs:**** Swagger
 - ****Testing:**** Jest, Supertest
+- ****Dev Tools:**** Nodemon, dotenv
+- ****CI/CD:**** GitHub Actions
 
 ## API Overview
 
 The API is documented with Swagger and can be explored at https://photo-caption-contest-gviy.onrender.com/api-docs/ .
 
 ## Testing
+The project uses an automated testing workflow powered by GitHub Actions.
+It includes both unit and integration tests, covering controllers, services, and API endpoints to ensure correct application behavior.
 
-The project includes unit and integration tests covering all controllers, services, and endpoints.
-Tests ensure that the application logic works correctly and endpoints behave as expected.
+The database is created automatically in GitHub Actions using a PostgreSQL service container
 
-Run tests locally:
+
+Schema is initialized from db/schema.sql
+
+
+Test data is loaded from db/seed.sql
+
+
+Tests are executed automatically on:
+
+- push to main
+- pull requests
+- manual workflow runs
+
+To run tests locally:
 - npm install
 - npm test
 
