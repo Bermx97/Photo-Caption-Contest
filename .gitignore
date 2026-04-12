@@ -9,6 +9,7 @@ node_modules/
 # database
 db/*
 !db/schema.sql
+!db/seed.sql
 
 # sqlite
 *.sqlite
