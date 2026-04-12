@@ -45,6 +45,9 @@ jobs:
       - name: Setup database schema
         run: psql $DATABASE_URL -f db/schema.sql
 
+      - name: Reset DB
+        run: psql $DATABASE_URL -c "TRUNCATE users, images, captions, likes RESTART IDENTITY CASCADE;"
+
       - name: Seed database
         run: psql $DATABASE_URL -f db/seed.sql
 
