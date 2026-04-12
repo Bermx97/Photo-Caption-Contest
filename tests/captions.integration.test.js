@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 let agent;
 let testUserId;
 const testPassword = '123456';
-const testUsername = 'testuser_' + Math.floor(Math.random() * 1000000);
+const testUsername = 'testuser' + Math.floor(Math.random() * 1000000);
 const testCaption = 'TEST_CAPTION_' + Date.now();
 
 beforeAll(async () => {
