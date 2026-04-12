@@ -25,7 +25,7 @@ describe('showUser', () => {
     });
 
     it('should render user`s page if user existed', async () => {
-        const req = {  params: { id: 'Test' }, session: { userName: 'dwe' } };
+        const req = {  params: { id: 'Test' }, session: { username: 'dwe' } };
         const res = { render: jest.fn() };
 
         loginService.findUser.mockResolvedValue({ rows: [{ id: 33, username: 'Test', role: 'user' }]  });

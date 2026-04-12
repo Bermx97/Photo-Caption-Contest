@@ -6,10 +6,10 @@
   <link rel="stylesheet" href="/styles/gallery.css">
 </head>
 <body>
-    <% if (userName) { %>
-      <a href="/user/<%= userName %>">
+    <% if (username) { %>
+      <a href="/user/<%= username %>">
         <button class="profile-button">
-          <%= userName.charAt(0).toUpperCase() %>
+          <%= username.charAt(0).toUpperCase() %>
         </button>
       </a>
     <% } else { %>

@@ -8,9 +8,15 @@ exports.getUserCaptions = async (userId) => {
   return result.rows;
 };
 
-exports.editUsername = async (user, newUsername) => {
+exports.editUsername = async (username, newUsername) => {
   const result = await pool.query(
-    `UPDATE users SET username = $1 WHERE username = $2 RETURNING username`, [newUsername, user]
+    `UPDATE users SET username = $1 WHERE username = $2 RETURNING username`, [newUsername, username]
   );
   return result;
+};
+
+exports.editPassword = async (username, newHashedPassword) => {
+  const result = await pool.query('UPDATE users SET password = $1 WHERE username = $2 RETURNING username', [newHashedPassword, username]
+  );
+  return result
 };

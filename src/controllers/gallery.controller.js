@@ -7,8 +7,8 @@ exports.showGallery = async (req, res) => {
       error.status = 500;
       throw error;
     }
-    const userName = req.session?.userName || null; 
-    res.render('gallery', { images, userName });
+    const username = req.session?.username || null; 
+    res.render('gallery', { images, username });
 };
 
 exports.showImage = async (req, res) => {
@@ -26,6 +26,6 @@ exports.showImage = async (req, res) => {
     if (page > totalPage && totalPage > 0) {
       return res.redirect(`/gallery/${req.params.id}?page=${totalPage}`);
     }
-    const userName = req.session?.userName || null;
-    res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role, page, totalPage, userName });
+    const username = req.session?.username || null;
+    res.render('image', { image, captions, currentUserId: req.session.userId, currentUserRole: req.session.role, page, totalPage, username });
 };

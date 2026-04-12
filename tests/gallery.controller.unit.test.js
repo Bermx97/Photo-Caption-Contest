@@ -17,7 +17,7 @@ describe('showGallery', () => {
                 { id: 'lolek', filename: 'lolek.jpg' },
                 { id: 'koko', filename: 'koko.jpg' }
             ], 
-            userName: null, });
+            username: null, });
         expect(res.render).toHaveBeenCalledTimes(1);
         expect(galleryService.getGallery).toHaveBeenCalled();
     });
@@ -50,7 +50,7 @@ describe('showImage', () => {
     });
 
     it('should render image page if image exists', async () => {
-        const req = { params: { id: 'lolek' }, session: { userId : 2, role: 'user', userName: 'testuser' }, query: { page: 3 } }
+        const req = { params: { id: 'lolek' }, session: { userId : 2, role: 'user', username: 'testuser' }, query: { page: 3 } }
         const res = { render: jest.fn() };
 
         galleryService.getImageWithCaptions.mockResolvedValue({
@@ -70,7 +70,7 @@ describe('showImage', () => {
                 { id: 6, caption: 'testCaption', user_id: 4, image_id: 'lolek' },
                 { id: 1, caption: 'lolinek', user_id: 1, image_id: 'lolek' }
              ],
-             userName: 'testuser',
+             username: 'testuser',
              currentUserId: req.session.userId,
              currentUserRole: req.session.role,
              page: 3,

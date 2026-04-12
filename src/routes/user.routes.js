@@ -16,5 +16,18 @@ router.patch('/edit-nickname',
     .withMessage('Username must contain only letters and numbers'),
     validateRequest, isAuthenticated, userController.editUsername);
 
+router.patch('/edit-password',
+    body('currentPassword')
+    .isLength({ min: 6, max: 25 })
+    .withMessage('Password must be at least 6-25 characters long')
+    .matches(/[A-Z]/)
+    .withMessage('Password must contain at least one uppercase letter'),
+    body('newPassword')
+    .isLength({ min: 6, max: 25 })
+    .withMessage('Password must be at least 6-25 characters long')
+    .matches(/[A-Z]/)
+    .withMessage('Password must contain at least one uppercase letter'),
+    validateRequest, isAuthenticated, userController.editPassword);
+
 
 module.exports = router;
