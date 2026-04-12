@@ -20,7 +20,7 @@ INSERT INTO users (id, username, password, role) VALUES
 (22, 'maria', 'hashed_password_5', 'user');
 
 INSERT INTO captions (id, caption, user_id, image_id) VALUES
-(1,'first!', 18, 'lolek')
+(1,'first!', 18, 'lolek'),
 (53, 'So cute', 17, 'lolek'),
 (33, 'This pig is living its best life', 17, 'pig'),
 (34, 'Deer looking straight into my soul', 18, 'deer'),
