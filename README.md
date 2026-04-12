@@ -13,7 +13,7 @@ The application is fully deployed on Render, including the database. Users can a
 ## Features
 
 - User registration and login
-- Edit your username directly from your profile
+- Edit your username and passsword directly from your profile
 - Add captions to images stored in the database
 - Edit and delete your captions
 - Like other users' captions (only one like per user per caption)
