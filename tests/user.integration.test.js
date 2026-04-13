@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 let agent;
 let testUserId;
-const testPassword = '123456';
+const testPassword = '123456L';
 const testUsername = 'testuser' + Math.floor(Math.random() * 1000000);
 
 beforeAll(async () => {
@@ -82,6 +82,52 @@ describe('PATCH /user/edit-nickname', () => {
         expect(response.body.nickname).toBe(`new${testUsername}`);
     });
 }); 
+
+describe('PATCH /user/edit-password', () => {
+
+    it('should return 400 if new password is not different from current password',async () => {
+        const response = await agent
+        .patch('/user/edit-password')
+        .send({ currentPassword: testPassword, newPassword: testPassword});
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe('New password must be different from current password');
+    });
+
+    it('should return 404 if User is not found', async () => {
+        const agent404 = request.agent(app);
+
+        await agent404
+        .post('/register')
+        .send({ username: 'Test404', password: 'Test404' });
+
+        await agent404
+        .post('/login')
+        .send({ username: 'Test404', password: 'Test404' });
+
+        await pool.query('DELETE FROM users WHERE username = $1',['Test404']);
+        const response = await agent404
+        .patch('/user/edit-password')
+        .send({ currentPassword: 'testPassword', newPassword: 'newPassword' });
+        expect(response.status).toBe(404);
+        expect(response.body.message).toBe('User not found');
+    });
+
+    it('should return 400 if current password is incorrect', async () => {
+        const response = await agent
+        .patch('/user/edit-password')
+        .send({ currentPassword: 'wrongPassword', newPassword: 'newPassword' });
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe('Current password is incorrect');
+    });
+
+    it('should return 200 if the password change is successful', async  () => {
+        const response = await agent
+        .patch('/user/edit-password')
+        .send({ currentPassword: testPassword, newPassword: 'newPassword' });
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe('Password updated successfully');
+    });
+});
 
 afterAll(async () => {
     await pool.query(
