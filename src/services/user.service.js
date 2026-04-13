@@ -16,7 +16,7 @@ exports.editUsername = async (username, newUsername) => {
 };
 
 exports.editPassword = async (username, newHashedPassword) => {
-  const result = await pool.query('UPDATE users SET password = $1 WHERE username = $2 RETURNING username', [newHashedPassword, username]
+  const result = await pool.query('UPDATE users SET password = $1 WHERE username = $2', [newHashedPassword, username]
   );
   return result
 };

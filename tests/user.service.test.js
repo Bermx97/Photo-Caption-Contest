@@ -21,12 +21,21 @@ describe('getUserCaptions', () => {
 });
 
 describe('editUsername', () => {
-    it('should return edited username', async () => {
+    it('should update username and respond with new username', async () => {
         pool.query.mockResolvedValue(
             { rows: { nickname: 'newUsername' } }
         );
         const result = await userService.editUsername('oldUsername', 'newUsername')
         expect(pool.query).toHaveBeenCalledWith(`UPDATE users SET username = $1 WHERE username = $2 RETURNING username`, ['newUsername', "oldUsername"]);
         expect(result).toEqual({ rows: { nickname: 'newUsername' } });
+    });
+});
+
+describe('editPassword', () => {
+    it('should update password successfully', async () => {
+        pool.query.mockResolvedValue({ rowCount: 1 });
+        const result = await userService.editPassword('username', 'newHashedPassword');
+        expect(pool.query).toHaveBeenCalledWith('UPDATE users SET password = $1 WHERE username = $2', ['newHashedPassword', 'username']);
+        expect(result.rowCount).toBe(1);
     });
 });
