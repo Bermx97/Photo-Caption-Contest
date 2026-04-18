@@ -169,15 +169,3 @@ document.addEventListener('DOMContentLoaded', () => {
     closeDeleteModal();
   });
 });
-
-
-const editNicknameBtn = document.getElementById('edit-nickname');
-if (editNicknameBtn) { // sprawdzamy, czy przycisk istnieje
-  editNicknameBtn.addEventListener('click', () => {
-    console.log('przycisk działa');
-  });
-}
-
-editNicknameBtn.addEventListener('click', () => {
-    console.log('przycisk działa');
-});

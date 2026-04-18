@@ -267,6 +267,7 @@ body {
   gap: 3%;
   font-size: 15px!important;
   }
+
   .profile-button {
     font-size: 17px;
     height: 55px;
@@ -629,14 +630,42 @@ input[type="hidden"] {
   visibility: visible;
 }
 
-.pagination {
+
+.text-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.pagination {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 10%;
+  font-size: 23px;
+  font-family: Georgia, serif;
   color: #b6b7c4a8;
-  font-size: 20px;
-  font-family: Georgia, serif;                
+}
+
+.pagination-left {
+  justify-self: right;
+}
+
+.pagination-center {
+  justify-self: center;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.pagination-right {
+  justify-self: left;
+}
+
+.pagination a,
+.pagination p {
+  margin: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .gallery-button {
