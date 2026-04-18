@@ -76,4 +76,11 @@ exports.editPassword = async (req, res) => {
     return res.status(200).json({
   message: 'Password updated successfully'
 });
+
+};
+
+exports.searchUsers = async (req, res) => {
+    const username = req.query.username;
+    const result = await userService.searchUsers(username);
+    return res.status(200).json({ users: result });
 };

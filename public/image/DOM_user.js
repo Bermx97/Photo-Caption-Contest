@@ -3,6 +3,33 @@ const editPasswordBtn = document.getElementById('edit-password');
 const modal = document.getElementById('nickname-modal');
 const backdrop = document.getElementById('modalBackdrop');
 const form = document.getElementById('nickname-form');
+const closeModalBtn = document.getElementById('close-modal');
+const cancelBtn = document.getElementById('cancelBtn');
+
+if (modal) modal.classList.add('show');
+if (backdrop) backdrop.classList.add('show');
+if (modal) modal.classList.remove('show');
+if (backdrop) backdrop.classList.remove('show');
+
+if (editNicknameBtn) {
+  editNicknameBtn.addEventListener('click', () => openModal('nickname'));
+}
+
+if (editPasswordBtn) {
+  editPasswordBtn.addEventListener('click', () => openModal('password'));
+}
+
+if (closeModalBtn) {
+  closeModalBtn.addEventListener('click', closeModal);
+}
+
+if (cancelBtn) {
+  cancelBtn.addEventListener('click', closeModal);
+}
+
+if (backdrop) {
+  backdrop.addEventListener('click', closeModal);
+}
 
 let currentAction = null;
 
@@ -28,12 +55,6 @@ function closeModal() {
   modal.classList.remove('show');
   backdrop.classList.remove('show');
 }
-
-editNicknameBtn.addEventListener('click', () => openModal('nickname'));
-editPasswordBtn.addEventListener('click', () => openModal('password'));
-document.getElementById('close-modal').addEventListener('click', closeModal);
-document.getElementById('cancelBtn').addEventListener('click', closeModal);
-backdrop.addEventListener('click', closeModal);
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -83,3 +104,29 @@ form.addEventListener('submit', async (e) => {
   errorMessageEl.style.color = '#ff6b6b';
 } 
 });
+
+const input = document.getElementById('search');
+const results = document.getElementById('results');
+
+if (input && results) {
+  input.addEventListener('input', async () => {
+    const query = input.value;
+
+    if (!query) {
+      results.innerHTML = '';
+      return;
+    }
+
+    const res = await fetch(`/user/search?username=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    const users = data.users || data;
+
+    results.innerHTML = users
+      .map(user => `
+        <li>
+          <a href="/user/${user.username}">${user.username}</a>
+        </li>
+      `)
+      .join('');
+  });
+}

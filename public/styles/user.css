@@ -159,11 +159,17 @@ body {
   justify-content: flex-start;
 }
 
-.logout-wrapper {
-  display: block;
+.search-container {
   width: 100%;
-  text-align: end;  
-  margin-top: 20px;
+  text-align:
+  end; margin-top:
+  20px;
+}
+
+.logout-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 
 .logout-button {
@@ -298,4 +304,62 @@ body {
   margin-top: 10px;
   font-size: 20px;
   text-align: center;
+}
+
+#search {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px 20px;
+  background-color: rgb(30, 27, 46);
+  border: 1px solid rgba(153, 154, 179, 0.3);
+  border-radius: 15px;
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+}
+
+#search:focus {
+  border-color: rgba(100, 90, 150, 0.877);
+  box-shadow: 0 0 10px rgba(100, 90, 150, 0.5);
+}
+
+#results {
+  margin: 15px 0;
+  list-style: none;
+  padding: 0;
+  margin: 15px auto;
+  max-width: 400px;
+}
+
+#results li {
+  background-color: rgb(30, 27, 46);
+  border-radius: 15px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  text-align: left;
+  color: rgb(153, 154, 179);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+}
+
+#results li:hover {
+  background-color: rgb(40, 36, 60);
+  color: #fff;
+  transform: scale(1.02);
+}
+
+#results a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+#results a:hover {
+  color: #fff;
 }

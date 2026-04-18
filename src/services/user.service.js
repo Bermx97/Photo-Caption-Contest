@@ -20,3 +20,8 @@ exports.editPassword = async (username, newHashedPassword) => {
   );
   return result
 };
+
+exports.searchUsers = async (username) => {
+  const result = await pool.query('SELECT username FROM users WHERE username ILIKE $1', [`${username}%`]);
+  return result.rows
+};

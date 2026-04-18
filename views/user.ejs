@@ -6,59 +6,110 @@
   <title><%= username %>'s Profile</title>
   <link rel="stylesheet" href="/styles/user.css">
 </head>
+
 <body>
-    <div class="top-buttons">
-  <a href="/gallery">
-    <button id="gallery-button" class="gallery-button">Gallery</button>
-  </a>
-</div>
+
+  <div class="top-buttons">
+    <a href="/gallery">
+      <button id="gallery-button" class="gallery-button">Gallery</button>
+    </a>
+  </div>
+
   <div class="profile-container">
+
     <div class="profile-card">
       <h2>Username: <span id="username"><%= username %></span></h2>
       <p>Role: <span id="role"><%= role %></span></p>
       <p>Captions added: <span id="captions-count"><%= totalCaptions %></span></p>
       <p>Total likes: <span id="likes-count"><%= totalLikes %></span>&nbsp;&#128061;</p>
-      <% if (username === loggedUser) { %> 
-          <button id="edit-nickname" class="gallery-button">Edit Username</button>
-          <button id="edit-password" class="gallery-button">Edit Password</button>
-          <% } %>
-          <p id="success-form-message" class="form-message"></p>
+
+      <% if (username === loggedUser) { %>
+        <button id="edit-nickname" class="gallery-button">Edit Username</button>
+        <button id="edit-password" class="gallery-button">Edit Password</button>
+      <% } %>
+
+      <p id="success-form-message" class="form-message"></p>
     </div>
+
     <div class="captions-list text-container">
-      <% if (username === loggedUser) { %> 
-          <h3>My Captions</h3>
-        <% } else { %>
-          <h3><%= username %>'s Captions</h3>
-        <% } %>
+      <% if (username === loggedUser) { %>
+        <h3>My Captions</h3>
+      <% } else { %>
+        <h3><%= username %>'s Captions</h3>
+      <% } %>
+
       <ul id="user-captions">
-          <% captions.forEach(caption => { %>
+        <% captions.forEach(caption => { %>
           <li>
-              <span class="caption-text"><%= caption.caption %></span>
+            <span class="caption-text"><%= caption.caption %></span>
           </li>
-          <% }) %>
+        <% }) %>
       </ul>
     </div>
+
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search users..." />
+      <ul id="results"></ul>
+    </div>
+
     <div class="logout-wrapper">
       <form action="/logout" method="POST">
         <button type="submit" class="logout-button">Logout</button>
       </form>
     </div>
-      <div id="modalBackdrop"></div>
-      <div id="nickname-modal">
-        <div id="modalContent">
-          <span id="close-modal">X</span>
-          <form id="nickname-form">
-            <input type="text" name="newNickname" id="modalInput" placeholder="New nickname" class="modal-field nickname-field" maxlength="20" minlength="3" >
-            <input type="password" name="currentPassword" id="currentPassword" placeholder="Current password" class="modal-field password-field" style="display:none;" minlength="6" maxlength="25">
-            <input type="password" name="newPassword" id="newPassword" placeholder="New password" class="modal-field password-field" style="display:none;" minlength="6" maxlength="25">
-            <div>
-              <button type="submit">Save</button>
-              <button type="button" id="cancelBtn">Cancel</button>
-            </div>
-            <p id="error-form-message" class="form-message"></p>
-          </form>
+
+  </div>
+
+  <div id="modalBackdrop"></div>
+
+  <div id="nickname-modal">
+    <div id="modalContent">
+      <span id="close-modal">X</span>
+
+      <form id="nickname-form">
+        <input
+          type="text"
+          name="newNickname"
+          id="modalInput"
+          placeholder="New nickname"
+          class="modal-field nickname-field"
+          maxlength="20"
+          minlength="3"
+        >
+
+        <input
+          type="password"
+          name="currentPassword"
+          id="currentPassword"
+          placeholder="Current password"
+          class="modal-field password-field"
+          style="display:none;"
+          minlength="6"
+          maxlength="25"
+        >
+
+        <input
+          type="password"
+          name="newPassword"
+          id="newPassword"
+          placeholder="New password"
+          class="modal-field password-field"
+          style="display:none;"
+          minlength="6"
+          maxlength="25"
+        >
+
+        <div>
+          <button type="submit">Save</button>
+          <button type="button" id="cancelBtn">Cancel</button>
         </div>
-      </div>
-    <script src="/image/DOM_user.js"></script>
+
+        <p id="error-form-message" class="form-message"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/image/DOM_user.js"></script>
+
 </body>
 </html>
