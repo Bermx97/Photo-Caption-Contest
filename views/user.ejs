@@ -54,7 +54,11 @@
 
     <div class="logout-wrapper">
       <form action="/logout" method="POST">
-        <button type="submit" class="logout-button">Logout</button>
+    <% if (loggedUser) { %>
+      <button type="submit" class="logout-button">Sign out</button>
+    <% } else { %>
+      <button type="submit" class="logout-button">Sign in</button>
+    <% } %>
       </form>
     </div>
 
