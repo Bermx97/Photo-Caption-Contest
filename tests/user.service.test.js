@@ -39,3 +39,21 @@ describe('editPassword', () => {
         expect(result.rowCount).toBe(1);
     });
 });
+
+describe('searchUsers', () => {
+    it('should return a list of searched users', async () => {
+        pool.query.mockResolvedValue({
+            rows: [
+                { username: 'AAaAnn' },
+                { username: 'admin1' },
+                { username: 'Admin' },
+                { username: 'aAlkan' }
+            ]
+        });
+        const result = await userService.searchUsers('a');
+        expect(pool.query).toHaveBeenCalledWith('SELECT username FROM users WHERE username ILIKE $1', ['a%'])
+        expect(result).toEqual([
+            { username: 'AAaAnn'}, { username: 'admin1' }, { username: 'Admin' }, { username: 'aAlkan'}
+        ]);
+    });
+});

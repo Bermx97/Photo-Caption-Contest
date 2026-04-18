@@ -129,6 +129,16 @@ describe('PATCH /user/edit-password', () => {
     });
 });
 
+describe('GET /user/search', () => {
+    it('should return 200 with matching users', async () => {
+        const response = await request(app)
+        .get('/user/search')
+        .query({ username: 'a' });
+        expect(response.status).toBe(200);
+        expect(response.body.users).toBeDefined();
+    });
+});
+
 afterAll(async () => {
     await pool.query(
         'DELETE FROM users WHERE id = $1',
