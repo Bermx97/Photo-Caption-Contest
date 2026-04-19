@@ -4,11 +4,6 @@ const bcrypt = require('bcrypt');
 exports.login = async (req, res) => {
       const wanted = req.body.username;
       const password = req.body.password;
-      if (!wanted || !password) {
-        const error = new Error('Username and password are required');
-        error.status = 400;
-        throw error;
-      }
       const user = await loginService.findUser(wanted);
       if (user.rows.length === 0 ) {
         const error = new Error('Invalid login credentials');
